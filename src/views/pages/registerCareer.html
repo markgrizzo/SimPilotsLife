@@ -1,0 +1,86 @@
+﻿<div class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card" ng-controller="RegisterCareerCtrl">
+                    <div class="card-header">
+                        <strong>Career Setup</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-sm-9">
+                                <label for="ddCareers">Starting Career</label>
+                                <select class="form-control w-100" id="ddCareers" ng-model="selectedCareer" ng-change="careerChange()" ng-options="career.Name for career in careers"></select>
+                                <!--<select class="form-control" id="ddCareer2">
+                <option ng-model="selectedCareerId" ng-change="getAircraftsAllowedByCareer(selectedCareerId)" ng-repeat="career in careers" value="{{ career.CareerId }}">{{ career.Name }}</option>
+            </select>-->
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="careerStart">Career Start</label>
+                                <input type="date" class="form-control" id="careerStart" ng-model="pilot.CurrentGameDateTimeUTC">
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="ddAircrafts">Aircraft</label>
+                                <!--<select class="form-control w-100" id="ddAircrafts" ng-model="selectedAircraft" ng-options="aircraft.AircraftTypeName for aircraft in aircrafts"></select>-->
+                                <select class="form-control w-100" id="ddAircrafts" ng-model="selectedAircraft" ng-options="aircraft.Model group by aircraft.AircraftFamily for aircraft in aircrafts"></select>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="aircraftDescription">Aircraft Description</label>
+                                <input type="text" class="form-control" id="aircraftDescription" ng-model="pilot.AircraftDescription" placeholder="Enter the descripton of aircraft">
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="ddCompanies">Company</label>
+                                <select class="form-control w-100" id="ddCompanies" ng-model="selectedCompany" ng-options="company.CompanyName for company in companies"></select>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="homeBaseIcao">Home base ICAO</label>
+                                <input type="text" class="form-control" id="homeBaseIcao" ng-model="pilot.HomeBaseIcao" ng-change="pilot.HomeBaseIcao=(pilot.HomeBaseIcao | uppercase)" placeholder="Enter home base ICAO code">
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" ng-model="pilot.FirstName" placeholder="Enter your first name">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" ng-model="pilot.LastName" placeholder="Enter your last name">
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="birthDateMonth">Birth Month</label>
+                                <input type="number" class="form-control pr-2" id="birthDateMonth" ng-model="pilot.BirthDateMonth">
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="birthDateDay">Birth Day</label>
+                                <input type="number" class="form-control" id="birthDateDay" ng-model="pilot.BirthDateDay">
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="weight">Weight (lbs)</label>
+                                <input type="number" class="form-control" id="weight" ng-model="pilot.Weight">
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <div class="card-footer p-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-block btn-success" ng-click="createPilot()">Create Pilot</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

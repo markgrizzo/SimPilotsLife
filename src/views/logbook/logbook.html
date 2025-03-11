@@ -1,0 +1,531 @@
+﻿<div class="" animated fadeIn" ng-controller="LogbookCtrl">
+    <!-- Profile -->
+    <div class="card" ng-controller="ProfileCtrl">
+        <div class="card-body row pt-0 pb-0">
+            <div class="col-12 pt-0">
+                <div class="row">
+                    <div class="pl-3" style="width: 160px;">
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images" src="../img/profile/ProfileDefault.png" style="width: 120px; height: 150px; border: 0px solid none;" />
+                        </div>
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images pb-1" src="{{ epauletImage }}" style="width: 120px; height: 55px;" />
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="callout callout-primary col-6 h-100">
+                                <ul class="icons-list pb-0 text-left">
+                                    <li class="" style="height: 33%;">
+                                        <font class="font-2xl">{{ profile.RankDescription }} {{ profile.FullName }}</font>
+                                    </li>
+                                    <li class="" style="height: 33%;">
+                                        <font style="font-size: 18px;">Flying at {{ profile.CompanyName }}</font>
+                                        <span class="pl-2">
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 1 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 2 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 3 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 4 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 5 ? 'text-success' : 'text-muted'"></span>
+                                        </span>
+                                    </li>
+                                    <li class="" style="height: 33%; font-size: 16px;">
+                                        <!-- Licenses -->
+                                        <div class="row pl-3">
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'text-success' : 'text-danger'">Student</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'text-success' : 'text-danger'">Private</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'text-success' : 'text-danger'">Commerical</span>
+                                            </div>
+                                            <div>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'text-success' : 'text-danger'">ATP</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-2">
+                                <div class="callout callout-info">
+                                    <i class="icon-hourglass"></i>
+                                    <small class="text-muted">Age - ({{ profile.BirthDate !== '0001-01-01T00:00:00' ? (profile.BirthDate | date:'MM-dd-yyyy') : '' }})</small>
+                                    <br>
+                                    <strong class="h4">{{ profile.Age }} yrs.</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="callout callout-info">
+                                    <ul class="icons-list pb-0 text-left">
+                                        <li class="h-100">
+                                            <div class="float-left">
+                                                <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px;" />
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Service Years</small>
+                                                <br>
+                                                <strong class="h4">{{ profile.YearsInService | currency : "" : 2  }} yrs</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <h4 class="card-title mb-0">{{ profile.CareerName }} Career</h4>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <div class="row" ng-controller="LogbookCareerCtrl">
+                                    <div class="col-2">
+                                        <div class="callout">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Hours</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.FlightTimeHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-primary">
+                                            <i class="icon-star"></i>
+                                            <small class="text-muted">Rating</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.Rating  | currency : "" : 2  }}</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating  }}%" aria-valuenow="{{ logbook.Rating  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-info">
+                                            <i class="icon-clock"></i>
+                                            <small class="text-muted">On Time %</small>
+                                            <br>
+                                            <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-danger">
+                                            <i class="fa fa-map-marker"></i> / <i class="icon-home"></i>
+                                            <small class="text-muted">Location</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-4">
+                                        <div class="callout callout-info">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Aircraft</small>
+                                            <span class="pr-2 text-muted">
+                                                (
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                )
+                                            </span>
+                                            <br>
+                                            <strong class="h4">{{ profile.Manufacturer }} {{ profile.Model }} / {{ profile.AircraftDescription }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <!--/.col-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
+
+    <!-- Logbook -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="card-title mb-0">Flight Log<span class="font-sm pl-1">(UTC)</span></h4>
+                        </div><!--/.col-->
+                    </div>
+                    <div class="row pb-0">
+                        <!-- Current Aircraft -->
+                        <div class="col-sm-6 col-lg-1">
+                            <div class="callout callout-info">
+                                <i class="fa fa-building"></i>
+                                <small class="text-muted">From</small>
+                                <br>
+                                <strong class="h4">{{ logbook.IcaoFrom }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="callout callout-info">
+                                <i class="icon-plane"></i>
+                                <small class="text-muted">Airport</small>
+                                <br>
+                                <strong class="h4">{{ logbook.IcaoFromAirportName }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-2">
+                            <div class="callout callout-primary">
+                                <i class="icon-star"></i>
+                                <small class="text-muted">Rating</small>
+                                <br>
+                                <strong class="h4">{{ logbook.Rating | currency : "" : 2  }}</strong>
+                                <div class="bars">
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating }}%" aria-valuenow="{{ logbook.Rating }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-1">
+                            <div class="callout callout-info">
+                                <i class="fa fa-building"></i>
+                                <small class="text-muted">To</small>
+                                <br>
+                                <strong class="h4">{{ logbook.IcaoTo }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="callout callout-info">
+                                <i class="icon-plane"></i>
+                                <small class="text-muted">Airport</small>
+                                <br>
+                                <strong class="h4">{{ logbook.IcaoToAirportName }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                    <!-- Aircraft information -->
+                    <div class="row pb-0">
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Aircraft</div>
+                                        <small>Aircraft used in flight</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.AircraftDescription }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Family / Model</div>
+                                        <small>Family and model of aircraft</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.AircraftFamily }} / {{ logbook.Model }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Company</div>
+                                        <small>Company currently working for</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.CompanyName }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Rank</div>
+                                        <small>Current rank in career</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.RankDescription }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Passengers</div>
+                                        <small>Total number of passengers on board</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.TotalPassengers }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Passenger Payload</div>
+                                        <small>Passenger weight</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.PayloadPassenger }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Passenger Baggage</div>
+                                        <small>Baggage weight</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.PayloadBaggage }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Cargo Payload</div>
+                                        <small>Weight of cargo</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.PayloadPassenger }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Taxi Departure Fuel</div>
+                                        <small>Fuel used during taxi departure</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.FuelUsedTaxiDeparture | currency : "" : 2  }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">In Flight Fuel</div>
+                                        <small>Fuel used during flight</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.FuelUsedInFlight | currency : "" : 2  }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Taxi Arrival Fuel</div>
+                                        <small>Fuel used during taxi arrival</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.FuelUsedTaxiArrival | currency : "" : 2  }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Total Fuel Used</div>
+                                        <small>Fuel used during the entire flight</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ logbook.FuelUsedFlight | currency : "" : 2  }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                    <div class="row">
+                        <div class="card-body pb-0">
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Pre-flight</th>
+                                        <th>Boarding</th>
+                                        <th>Block Off</th>
+                                        <th>Takeoff</th>
+                                        <th>Land</th>
+                                        <th>Block On</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">Estimated</td>
+                                        <td class="h5">{{ logbook.EstTimePreFlightUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimePreFlightUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.EstTimeBoardingUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimeBoardingUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.EstTimeBlockOffUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimeBlockOffUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.EstTimeDepartureUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimeDepartureUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.EstTimeArrivalUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimeArrivalUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.EstTimeBlockOnUTC !== '0001-01-01T00:00:00' ? (logbook.EstTimeBlockOnUTC | date:"HH:mm'z'") : '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Actual</td>
+                                        <td class="h5">{{ logbook.ActualTimePreFlightUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimePreFlightUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.ActualTimeBoardingUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimeBoardingUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.ActualTimeBlockOffUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimeBlockOffUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.ActualTimeDepartureUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimeDepartureUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.ActualTimeArrivalUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimeArrivalUTC | date:"HH:mm'z'") : '--' }}</td>
+                                        <td class="h5">{{ logbook.ActualTimeBlockOnUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimeBlockOnUTC | date:"HH:mm'z'") : '--' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">&nbsp;</td>
+                                        <td class="text-left">&nbsp;</td>
+                                        <td class="text-left">&nbsp;</td>
+                                        <td class="h5">
+                                            {{ logbook.DiffTimeBlockOffMin }} min&nbsp;
+                                            <span class="text-success" ng-if="logbook.DiffTimeBlockOffMin >= 0">(early)</span>
+                                            <span class="text-danger" ng-if="logbook.DiffTimeBlockOffMin < 0">(late)</span>
+                                        </td>
+                                        <td class="h5">
+                                            {{ logbook.DiffTimeDepartureMin }} min&nbsp;
+                                            <span class="text-success" ng-if="logbook.DiffTimeDepartureMin >= 0">(early)</span>
+                                            <span class="text-danger" ng-if="logbook.DiffTimeDepartureMin < 0">(late)</span>
+                                        </td>
+                                        <td class="h5">
+                                            {{ logbook.DiffTimeArrivalMin }} min&nbsp;
+                                            <span class="text-success" ng-if="logbook.DiffTimeArrivalMin >= 0">(early)</span>
+                                            <span class="text-danger" ng-if="logbook.DiffTimeArrivalMin < 0">(late)</span>
+                                        </td>
+                                        <td class="h5">
+                                            {{ logbook.DiffTimeBlockOnMin }} min&nbsp;
+                                            <span class="text-success" ng-if="logbook.DiffTimeBlockOnMin >= 0">(early)</span>
+                                            <span class="text-danger" ng-if="logbook.DiffTimeBlockOnMin < 0">(late)</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+
+    <!-- Logbooks -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Logs<span class="font-sm pl-1">(UTC)</span></h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="logbooks.length > 0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Company</th>
+                            <th>Rank</th>
+                            <th>Icao From</th>
+                            <th>Airport Name</th>
+                            <th>Icao To</th>
+                            <th>Airport Name</th>
+                            <th>Salary</th>
+                            <th>Rating</th>
+                            <th>On Time?</th>
+                            <th>Pre-flight</th>
+                            <th>Flight Time</th>
+                            <th>Fuel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="logbook in logbooks">
+                            <td><button type="button" class="btn btn-link text-muted pt-0" ng-click="viewLogbook(logbook.LogbookId)"><i class="fa fa-eye"></i></button>{{ logbook.CompanyName }}</td>
+                            <td>{{ logbook.RankDescription }}</td>
+                            <td>{{ logbook.IcaoFrom }}</td>
+                            <td>{{ logbook.IcaoFromAirportName }}</td>
+                            <td>{{ logbook.IcaoTo }}</td>
+                            <td>{{ logbook.IcaoToAirportName }}</td>
+                            <td>{{ logbook.Salary | currency : "$" : 2  }}</td>
+                            <td>{{ logbook.Rating | currency : "" : 2  }}</td>
+                            <td><span ng-class="logbook.IsFlightOnTime === true ? 'fa fa-check text-success' : ''"></span></td>
+                            <td>{{ logbook.ActualTimePreFlightUTC !== '0001-01-01T00:00:00' ? (logbook.ActualTimePreFlightUTC | date:"HH:mm'z'") : '' }}</td>
+                            <td>{{ logbook.FlightTimeHrs }} hrs</td>
+                            <td>{{ logbook.FuelUsedFlight | currency : "" : 2  }} lbs</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center w-100" ng-show="logbooks.length === 0">
+                    <span>No flights have been logged</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

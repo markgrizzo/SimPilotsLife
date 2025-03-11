@@ -1,0 +1,1049 @@
+﻿<style type="text/css">
+
+    .card-body-scrollbars {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .image-background-aircraft {
+        background: url(img/hangars/hangar2.svg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+</style>
+
+
+<!-- Hangar Stats -->
+<div ng-controller="HangarCtrl">
+
+    <!-- Profile -->
+    <div class="card" ng-controller="ProfileCtrl">
+        <div class="card-body row pt-0 pb-0">
+            <div class="col-12 pt-0">
+                <div class="row">
+                    <div class="pl-3" style="width: 160px;">
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images" src="../img/profile/ProfileDefault.png" style="width: 120px; height: 150px; border: 0px solid none;" />
+                        </div>
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images pb-1" src="{{ epauletImage }}" style="width: 120px; height: 55px;" />
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="callout callout-primary col-6 h-100">
+                                <ul class="icons-list pb-0 text-left">
+                                    <li class="" style="height: 33%;">
+                                        <font class="font-2xl">{{ profile.RankDescription }} {{ profile.FullName }}</font>
+                                    </li>
+                                    <li class="" style="height: 33%;">
+                                        <font style="font-size: 18px;">Flying at {{ profile.CompanyName }}</font>
+                                        <span class="pl-2">
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 1 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 2 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 3 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 4 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 5 ? 'text-success' : 'text-muted'"></span>
+                                        </span>
+                                    </li>
+                                    <li class="" style="height: 33%; font-size: 16px;">
+                                        <!-- Licenses -->
+                                        <div class="row pl-3">
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'text-success' : 'text-danger'">Student</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'text-success' : 'text-danger'">Private</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'text-success' : 'text-danger'">Commerical</span>
+                                            </div>
+                                            <div>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'text-success' : 'text-danger'">ATP</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-2">
+                                <div class="callout callout-info">
+                                    <i class="icon-hourglass"></i>
+                                    <small class="text-muted">Age - ({{ profile.BirthDate !== '0001-01-01T00:00:00' ? (profile.BirthDate | date:'MM-dd-yyyy') : '' }})</small>
+                                    <br>
+                                    <strong class="h4">{{ profile.Age }} yrs.</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="callout callout-info">
+                                    <ul class="icons-list pb-0 text-left">
+                                        <li class="h-100">
+                                            <div class="float-left">
+                                                <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px;" />
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Service Years</small>
+                                                <br>
+                                                <strong class="h4">{{ profile.YearsInService | currency : "" : 2  }} yrs</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <h4 class="card-title mb-0">{{ profile.CareerName }} Career</h4>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <div class="row" ng-controller="LogbookCareerCtrl">
+                                    <div class="col-2">
+                                        <div class="callout">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Hours</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.FlightTimeHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-primary">
+                                            <i class="icon-star"></i>
+                                            <small class="text-muted">Rating</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.Rating  | currency : "" : 2  }}</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating  }}%" aria-valuenow="{{ logbook.Rating  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-info">
+                                            <i class="icon-clock"></i>
+                                            <small class="text-muted">On Time %</small>
+                                            <br>
+                                            <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-danger">
+                                            <i class="fa fa-map-marker"></i> / <i class="icon-home"></i>
+                                            <small class="text-muted">Location</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-4">
+                                        <div class="callout callout-info">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Aircraft</small>
+                                            <span class="pr-2 text-muted">
+                                                (
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                )
+                                            </span>
+                                            <br>
+                                            <strong class="h4">{{ profile.Manufacturer }} {{ profile.Model }} / {{ profile.AircraftDescription }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <!--/.col-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
+
+    <!-- Current Hangar -->
+    <div message-directive></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="card-title mb-0"><span ng-class="hangar.HangarId === User.HangarId ? 'text-success' : ''" ng-show="hangar.HangarId === User.HangarId">Current&nbsp;</span>Aircraft</h4>
+                        </div><!--/.col-->
+                    </div>
+                    <div class="row pb-0">
+                        <!-- Manufacturer/Family/Type -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="callout callout-info">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">Manufacturer</small>
+                                        <br>
+                                        <strong class="h4">{{ hangar.Manufacturer }}</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="callout callout-info">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">Family / Type</small>
+                                        <br>
+                                        <strong class="h4">{{ hangar.AircraftFamily }}</strong> / <strong class="h4">{{ hangar.AircraftType }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                        <!-- Aircraft Model -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout callout-info">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">Aircraft</small>
+                                        <br>
+                                        <strong class="h4">{{ hangar.Model }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout callout-info">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">Description</small>
+                                        <br>
+                                        <!-- AircraftDescription update -->
+                                        <span ng-show="isEdit.AircraftDescription === false">
+                                            <strong class="h4" ng-show="isEdit.AircraftDescription === false">{{ hangar.AircraftDescription }}</strong>
+                                            <button type="button" ng-show="isEdit.AircraftDescription === false" class="btn btn-link text-muted btn-edit-single" ng-click="edit('AircraftDescription')"><i class="icon-settings"></i></button>
+                                        </span>
+                                        <span ng-show="isEdit.AircraftDescription === true">
+                                            <input type="text" ng-show="isEdit.AircraftDescription === true" class="w-75 form-control form-control-edit-single" ng-model="hangar.AircraftDescription">
+                                            <span class="float-right actionsEdit">
+                                                <i ng-click="update('AircraftDescription', hangar.AircraftDescription)" class="fa fa-check text-success"></i>
+                                                <i ng-click="cancel('AircraftDescription')" class="fa fa-close text-danger"></i>
+                                            </span>
+                                        </span>
+                                        <!-- (END) AircraftDescription update -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <!--/.row-->
+                    <div class="row">
+                        <!-- Flight Hours -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout pb-2 callout-primary">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">{{ hangar.AircraftFamily }} Hours</small>
+                                        <br>
+                                        <strong class="h4">{{ logbook.FlightTimeHrs }}</strong>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="icon-clock bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Pre-Flight Time</div>
+                                        <small>Minutes to pre-flight the aircraft</small>
+                                    </div>
+
+                                    <!-- PreFlightTimeMin update -->
+                                    <div ng-show="isEdit.PreFlightTimeMin === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ hangar.PreFlightTimeMin }} mins</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('PreFlightTimeMin')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.PreFlightTimeMin === true">
+                                        <div class="value w-15">
+                                            <input type="text" class="form-control text-right" ng-model="hangar.PreFlightTimeMin">
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('PreFlightTimeMin', hangar.PreFlightTimeMin)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('PreFlightTimeMin')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) PreFlightTimeMin update -->
+
+                                </li>
+                                <li>
+                                    <i class="icon-plane bg-danger"></i>
+                                    <div class="desc">
+                                        <div class="title">Aircraft Multiplier</div>
+                                        <small>Rate added to base pay</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hangar.PayRateMultiplier | currency : "x" : 2 }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-bank bg-warning"></i>
+                                    <div class="desc">
+                                        <div class="title">Type Rating Cost</div>
+                                        <small>Amount to get certified for aircraft type</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hangar.TypeRatingCost | currency : "$" : 2  }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.col-->
+                        <!-- Rating -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout callout-primary">
+                                        <i class="icon-star"></i>
+                                        <small class="text-muted">{{ hangar.AircraftFamily }} Rating</small>
+                                        <br>
+                                        <strong class="h4">{{ logbook.Rating | currency : "" : 2  }}</strong>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating }}%" aria-valuenow="{{ logbook.Rating }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="icon-people bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Number of Pilots</div>
+                                        <small>Pilots required to fly aircraft</small>
+                                    </div>
+                                    <!-- NumPilots update -->
+                                    <div ng-show="isEdit.NumPilots === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ hangar.NumPilots }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('NumPilots')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.NumPilots === true">
+                                        <div class="value w-15">
+                                            <input type="text" class="form-control text-right" ng-model="hangar.NumPilots">
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('NumPilots', hangar.NumPilots)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('NumPilots')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) NumPilots update -->
+                                </li>
+                                <li>
+                                    <i class="icon-user-female bg-danger"></i>
+                                    <div class="desc">
+                                        <div class="title">Number of Flight Crew</div>
+                                        <small>Flight crew required to be on aircraft</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hangar.NumFlightCrew }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="icon-question bg-warning"></i>
+                                    <div class="desc">
+                                        <div class="title">Flight Attendant?</div>
+                                        <small>Are flight attendants on board</small>
+                                    </div>
+                                    <!-- IsFlightAttendantOnBoard update -->
+                                    <div ng-show="isEdit.IsFlightAttendantOnBoard === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong ng-class="hangar.IsFlightAttendantOnBoard === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('IsFlightAttendantOnBoard')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.IsFlightAttendantOnBoard === true">
+                                        <div class="value w-15">
+                                            <label class="switch switch-icon switch-pill switch-primary mt-2">
+                                                <input type="checkbox" class="switch-input" checked ng-model="hangar.IsFlightAttendantOnBoard">
+                                                <span class="switch-label" data-on="&#xf00c" data-off="&#xf00d"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('IsFlightAttendantOnBoard', hangar.IsFlightAttendantOnBoard)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('IsFlightAttendantOnBoard')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) IsFlightAttendantOnBoard update -->
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.col-->
+                        <!-- Budget -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout callout-info">
+                                        <i class="icon-clock"></i>
+                                        <small class="text-muted">{{ hangar.AircraftFamily }} On Time %</small>
+                                        <br>
+                                        <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="icon-speedometer bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Ground Speed</div>
+                                        <small>Speed traveled across the ground</small>
+                                    </div>
+                                    <!-- GroundSpeedKts update -->
+                                    <div ng-show="isEdit.GroundSpeedKts === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ hangar.GroundSpeedKts }} kts</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('GroundSpeedKts')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.GroundSpeedKts === true">
+                                        <div class="value w-15">
+                                            <input type="text" class="form-control text-right" ng-model="hangar.GroundSpeedKts">
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('GroundSpeedKts', hangar.GroundSpeedKts)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('GroundSpeedKts')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) GroundSpeedKts update -->
+                                </li>
+                                <li>
+                                    <i class="icon-people bg-danger"></i>
+                                    <div class="desc">
+                                        <div class="title">Passenger Capacity</div>
+                                        <small>Amount of passengers aircraft can carry</small>
+                                    </div>
+                                    <!-- PassengerCapacity update -->
+                                    <div ng-show="isEdit.PassengerCapacity === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ hangar.PassengerCapacity }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('PassengerCapacity')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.PassengerCapacity === true">
+                                        <div class="value w-15">
+                                            <input type="text" class="form-control text-right" ng-model="hangar.PassengerCapacity">
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('PassengerCapacity', hangar.PassengerCapacity)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('PassengerCapacity')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) PassengerCapacity update -->
+                                </li>
+                                <li>
+                                    <i class="fa fa-cube bg-warning"></i>
+                                    <div class="desc">
+                                        <div class="title">Cargo Capacity</div>
+                                        <small>Amount of cargo aircraft can carry</small>
+                                    </div>
+
+                                    <!-- CargoCapacity update -->
+                                    <div ng-show="isEdit.CargoCapacity === false">
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ hangar.CargoCapacity }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" ng-click="edit('CargoCapacity')"><i class="icon-settings"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isEdit.CargoCapacity === true">
+                                        <div class="value w-15">
+                                            <input type="text" class="form-control text-right" ng-model="hangar.CargoCapacity">
+                                        </div>
+                                        <div class="actionsEdit">
+                                            <span ng-click="update('CargoCapacity', hangar.CargoCapacity)"><i class="fa fa-check text-success"></i></span>
+                                            <span ng-click="cancel('CargoCapacity')"><i class="fa fa-close text-danger"></i></span>
+                                        </div>
+                                    </div>
+                                    <!-- (END) CargoCapacity update -->
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row card-body pb-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><div>Flight</div><div>School?</div></th>
+                                    <th class="text-center">Private?</th>
+                                    <th class="text-center">Instructor?</th>
+                                    <th class="text-center">Corporate?</th>
+                                    <th class="text-center">Cargo?</th>
+                                    <th class="text-center">Regional?</th>
+                                    <th class="text-center">Major?</th>
+                                    <th class="text-center"><div>Single</div><div>Engine?</div></th>
+                                    <th class="text-center"><div>Multi</div><div>Engine?</div></th>
+                                    <th class="text-center"><div>Retractable</div><div>Gear?</div></th>
+                                    <th class="text-center">Complex?</th>
+                                    <th class="text-center"><div>High</div><div>Performance?</div></th>
+                                    <th class="text-center">Jet?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><span ng-class="hangar.IsFlightSchoolAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsPrivateAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsCFIAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsCorporateAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsCargoAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsRegionalAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsMajorAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsSingleEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsMultiEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsRetractableGear === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsComplex === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsHighPerformance === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                    <td class="text-center"><span ng-class="hangar.IsJet === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+
+    <!-- Hangar List -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="card-title mb-0">Hangar</h4>
+                </div>
+                <div class="col-6 text-right">
+                    <btn class="btn text-success fa fa-plus cursorPointer" ng-click="addHangarModal('')"></btn>
+                </div>
+            </div>
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="hangars.length > 0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th></th>
+                            <th>Description</th>
+                            <th>Model</th>
+                            <th>Manufacturer</th>
+                            <th>Family</th>
+                            <th>Type</th>
+                            <th>Passengers</th>
+                            <th>Cargo</th>
+                            <th class="text-center"><div>Single</div><div>Engine?</div></th>
+                            <th class="text-center"><div>Multi</div><div>Engine?</div></th>
+                            <th class="text-center"><div>Retractable</div><div>Gear?</div></th>
+                            <th class="text-center">Complex?</th>
+                            <th class="text-center"><div>High</div><div>Performance?</div></th>
+                            <th class="text-center">Jet?</th>
+                            <th class="text-center">Active?</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="hangar in hangars">
+                            <td>
+                                <button type="button" class="btn btn-link text-muted" ng-click="viewHangar(hangar.HangarId)"><i class="fa fa-eye"></i></button>
+                            </td>
+                            <td>{{ hangar.AircraftDescription }}</td>
+                            <td>{{ hangar.Model }}</td>
+                            <td>{{ hangar.Manufacturer }}</td>
+                            <td>{{ hangar.AircraftFamily }}</td>
+                            <td>{{ hangar.AircraftType }}</td>
+                            <td>{{ hangar.PassengerCapacity }}</td>
+                            <td>{{ hangar.CargoCapacity }}</td>
+                            <td class="text-center"><span ng-class="hangar.IsSingleEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsMultiEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsRetractableGear === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsComplex === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsHighPerformance === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsJet === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="hangar.IsActive === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td>
+                                <!-- Gates -->
+                                <span>
+                                    <i class="fa fa-map-signs cursorPointer" ng-click="editGatesModal('', hangar)"></i>
+                                </span>
+                                <!-- Active -->
+                                <span ng-show="hangar.IsActive === true">
+                                    <i class="fa fa-chain-broken cursorPointer" ng-click="confirmDisableHangarModal('sm', hangar)"></i>
+                                </span>
+                                <!-- Inactive -->
+                                <span ng-show="hangar.IsActive === false">
+                                    <i class="fa fa-chain cursorPointer" ng-click="confirmActivateHangarModal('sm', hangar)"></i>
+                                </span>
+                                <span class="pr-1">
+                                    <span class="badge badge-pill badge-success">{{ hangar.FlightCount }}</span>
+                                </span>
+                                <!-- No flights have been flown -->
+                                <span ng-show="hangar.FlightCount < 1">
+                                    <i class="fa fa-times cursorPointer pr-1 text-danger" ng-click="confirmDeleteHangarModal('sm', hangar)"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center w-100" ng-show="hangars.length === 0">
+                    <span>No aircraft have been acquired</span>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div class="modal-demo">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <div class="col-12" style="border: 1px solid blue;">
+                        This is a test of the emergency brodcast system!!!
+                    </div>
+                    <ul>
+                        <li ng-repeat="item in items">
+                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                        </li>
+                    </ul>
+                    Selected: <b>{{ selected.item }}</b>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+
+            <script type="text/ng-template" id="stackedModal.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+                </div>
+                <div class="modal-body" id="modal-body-{{name}}">
+                    Having multiple modals open at once is probably bad UX but it's technically possible.
+                </div>
+            </script>
+
+            <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+            <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
+            <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="open('sm', '.modal-parent')">
+                Modal appended to a custom parent
+            </button>
+            <button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
+            <button type="button" class="btn btn-default" ng-click="openComponentModal()">Open a component modal!</button>
+            <button type="button" class="btn btn-default" ng-click="openMultipleModals()">
+                Open multiple modals at once
+            </button>
+            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+            <div class="modal-parent">
+            </div>
+        </div>
+        -->
+    </div>
+
+    <!-- Pilot Type Ratings -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Type Ratings</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;" ng-controller="PilotTypeRatingCtrl">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="pilotTypeRatings.length > 0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Aircraft Family</th>
+                            <th>Family Name</th>
+                            <th class="text-center">
+                                <div>Payrate</div><div>Multiplier</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Type Rating</div><div>Cost</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pilotTypeRating in pilotTypeRatings">
+                            <td>{{ pilotTypeRating.AircraftFamily }}</td>
+                            <td>{{ pilotTypeRating.AircraftFamilyName }}</td>
+                            <td class="text-center">x{{ pilotTypeRating.PayRateMultiplier | currency : "" : 2 }}</td>
+                            <td class="text-center">{{ pilotTypeRating.TypeRatingCost | currency : "$" : 2 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center w-100" ng-show="pilotTypeRatings.length === 0">
+                    <span>No type ratings have been acquired</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Available Aircrafts -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Available Aircrafts</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Manufacturer</th>
+                            <th>Type</th>
+                            <th>Model</th>
+                            <th class="text-center"><div>Ground</div><div>Speed</div></th>
+                            <th class="text-center"><div>Single</div><div>Engine?</div></th>
+                            <th class="text-center"><div>Multi</div><div>Engine?</div></th>
+                            <th class="text-center"><div>Retractable</div><div>Gear?</div></th>
+                            <th class="text-center">Complex?</th>
+                            <th class="text-center"><div>High</div><div>Performance?</div></th>
+                            <th class="text-center">Jet?</th>
+                            <th class="text-center">Flight School?</th>
+                            <th class="text-center">Private?</th>
+                            <th class="text-center">Instructor?</th>
+                            <th class="text-center">Corporate?</th>
+                            <th class="text-center">Cargo?</th>
+                            <th class="text-center">Regional?</th>
+                            <th class="text-center">Major?</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="AircraftCtrl">
+                        <tr ng-repeat="aircraft in aircrafts">
+                            <td>{{ aircraft.Manufacturer }}</td>
+                            <td>{{ aircraft.AircraftFamily }}/{{ aircraft.AircraftType }}</td>
+                            <td>{{ aircraft.Model }}</td>
+                            <td class="text-center">{{ aircraft.GroundSpeedKts }}</td>
+                            <td class="text-center"><span ng-class="aircraft.IsSingleEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsMultiEngine === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsRetractableGear === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsComplex === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsHighPerformance === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsJet === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsFlightSchoolAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsPrivateAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsCFIAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsCorporateAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsCargoAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsRegionalAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="aircraft.IsMajorAllowed === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalAddHangar.html">
+            <div message-Modal-directive></div>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Add Aircraft</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="col-md-12 mb-4" ng-init="selectedTab = 1;">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a role="tab" aria-controls="Hangar" aria-selected="true" ng-class="{active: selectedTab == 1}" class="nav-link" href="#" ng-click="selectedTab = 1;"><i class="icon-plane pr-1"></i><font class="pr-2">Hangar</font><span class="badge badge-pill badge-success">{{ hangars.length }}</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a role="tab" aria-controls="TypeRating" aria-selected="false" ng-class="{active: selectedTab == 2}" class="nav-link" href="#" ng-click="selectedTab = 2;"><font class="pr-2">Type Rating</font><span class="badge badge-pill badge-success">{{ pilotTypeRatings.length }}</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div ng-class="{active: selectedTab == 1}" class="tab-pane" ng-show="selectedTab == 1" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <label class="pr-2">Currently owned aircrafts</label>
+                                        </div>
+                                        <div class="scrollbars">
+                                            <table class="table table-hover table-outline mb-0 hidden-sm-down">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Model</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="hangar in hangars">
+                                                        <td class="">{{ hangar.Model }}</td>
+                                                        <td class="">{{ hangar.AircraftDescription }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="{active: selectedTab == 2}" class="tab-pane" ng-show="selectedTab == 2" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <label class="pr-2">Current ratings</label>
+                                        </div>
+                                        <div class="scrollbars">
+                                            <table class="table table-hover table-outline mb-0 hidden-sm-down">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Family</th>
+                                                        <th>Type</th>
+                                                        <th class="text-center">
+                                                            <div>Payrate</div><div>Multiplier</div>
+                                                        </th>
+                                                        <th class="text-center">
+                                                            <div>Type Rating</div><div>Cost</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="pilotTypeRating in pilotTypeRatings">
+                                                        <td>{{ pilotTypeRating.AircraftFamily }}</td>
+                                                        <td>{{ pilotTypeRating.AircraftFamilyName }}</td>
+                                                        <td class="text-center">x{{ pilotTypeRating.PayRateMultiplier | currency : "" : 1 }}</td>
+                                                        <td class="text-center">{{ pilotTypeRating.TypeRatingCost | currency : "$" : 2 }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <div>
+                            <label class="pr-2">Add aircraft for current career</label>
+                        </div>
+                        <div>
+                            <div class="scrollbars">
+                                <div class="table-outline">
+                                    <div class="form-group col-sm-12 pt-2">
+                                        <label for="ddAircrafts">Select Aircraft</label>
+                                        <select class="form-control w-100" id="ddAircrafts" ng-model="selectedAircraft" ng-options="aircraft.Model + ' ($' + aircraft.TypeRatingCost + ')' group by aircraft.AircraftFamily for aircraft in aircrafts"></select>
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label for="aircraftDescription">Description</label>
+                                        <input type="text" class="form-control" id="aircraftDescription" ng-model="aircraftDescription" placeholder="Enter the descripton of aircraft">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="add()">Add Aircraft</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalActivateHangar.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Activate Aircraft</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label>Are you sure you want to activate the {{ hangar.Model }} / {{ hangar.AircraftDescription }} aircraft?</label>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="activate()">Activate Aircraft</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalDeleteHangar.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Delete Aircraft</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label>Are you sure you want to delete the {{ hangar.Model }} / {{ hangar.AircraftDescription }} aircraft?</label>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="delete()">Delete Aircraft</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalDisableHangar.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Disable Aircraft</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label>Are you sure you want to disable the {{ hangar.Model }} / {{ hangar.AircraftDescription }} aircraft?</label>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="disable()">Disable Aircraft</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalGate.html">
+            <div messageModal-directive></div>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Gates</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="callout callout-success">
+                            <small class="text-muted">Aircraft</small>
+                            <br>
+                            <strong class="h4">{{ hangar.AircraftType }} / {{ hangar.Model }}</strong>
+                        </div>
+                    </div>
+                    <!--/.col-->
+                </div>
+                <div class="row">
+                    <div class="col-12 card-body card-body-scrollbars">
+                        <table class="table table-striped" ng-show="gates.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Icao</th>
+                                    <th>Gates</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="gate in gates">
+                                    <td>
+                                        <div>
+                                            {{ gate.Icao }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="text" class="form-control w-100" ng-model="gate.Gate" ng-change="gate.Gate=(gate.Gate | uppercase)">
+                                        </div>
+                                    </td>
+                                    <td class="font-125xl">
+                                        <i class="fa fa-save cursorPointer pr-1" ng-click="save(gate)"></i>
+                                        <i class="fa fa-remove cursorPointer pr-1 text-danger" ng-click="delete(gate.GateId)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center w-100" ng-show="gates.length === 0">
+                            <span>No gates have been created</span>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+</div>

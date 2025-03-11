@@ -1,0 +1,1481 @@
+<style type="text/css">
+    .careerBox {
+        /*box-shadow: 5px 5px 5px rgba(81, 203, 238, 1);*/
+        /*padding: 3px 0px 3px 3px;*/
+        margin: 0px 0px 0px 0px;
+        border: 2px solid rgba(91, 103, 138, 1);
+    }
+
+    .icons-list li .carerBoxValue {
+        position: absolute;
+        top: 2px;
+        right: 0px;
+        text-align: right;
+    }
+
+    .icons-list li .carerBoxValue strong {
+        display: block;
+        margin-top: -3px;
+    }
+
+    .image-background {
+        background: url(img/careers/MajorCareer3.png) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background: rgba(25, 25, 25, 0.1);
+    }
+
+    .image-background-flight-school {
+        background: url(img/careers/FlightSchoolCareer3.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .image-background-private {
+        background: url(img/careers/PrivateCareer1a.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        filter: opacity(100)
+    }
+
+    .image-background-instructor {
+        background: url(img/careers/InstructorCareer.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .image-background-corporate {
+        background: url(img/careers/CorporateCareer3.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .image-background-cargo {
+        background: url(img/careers/CargoCareer5.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .image-background-regional {
+        background: url(img/careers/RegionalCareer4a.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .image-background-major {
+        background: url(img/careers/MajorCareer.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .epaulet-images img {
+        vertical-align: bottom;
+        border: 0;
+    }
+
+    .scrollbars {
+        overflow: auto;
+        height: 200px;
+    }
+
+    .text-shadow {
+        /*text-shadow: black 0.2em 0.2em 0.2em;*/
+        text-shadow: 0.1em 0.1em 0.1em #000, 0.1em 0.1em 0.1em #000
+    }
+
+    ul#license li {
+        display: inline;
+    }
+</style>
+
+<div class="animated fadeIn">
+
+    <div ng-controller="MainCtrl">
+        <!-- Header -->
+        <!--
+    <div class="card">
+        <div class="card-body row pt-0 pb-0" style="padding-left: 1em; padding-right: 1em;">
+            <div class="col-12 text-center"
+                 ng-class="(profile.CareerId == 1) ? 'image-background-flight-school' : (profile.CareerId == 2) ? 'image-background-private' : (profile.CareerId == 3) ? 'image-background-instructor' : (profile.CareerId == 4) ? 'image-background-corporate' : (profile.CareerId == 5) ? 'image-background-cargo' : (profile.CareerId == 6) ? 'image-background-regional' : (profile.CareerId == 7) ? 'image-background-major' : 'image-background'"
+                 style="height: 300px; width: 100%;">
+                <ul class="icons-list mt-2 pb-0 text-white text-shadow">
+                    <li class="mt-100">&nbsp;</li>
+                    <li class="mt-100">
+                        <font class="font-4xl">{{ profile.CareerName }} Career</font>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    -->
+        <!-- Profile -->
+        <div class="card" ng-controller="MainCtrl">
+            <div class="card-body row pt-0 pb-0">
+                <div class="col-12 pt-0">
+                    <div class="row">
+                        <div class="pl-3" style="width: 160px;">
+                            <div class="mt-2" style="vertical-align: bottom;">
+                                <img class="epaulet-images" src="../img/profile/ProfileDefault.png" style="width: 120px; height: 150px; border: 0px solid none;" />
+                            </div>
+                            <div class="mt-2" style="vertical-align: bottom;">
+                                <img class="epaulet-images pb-1" src="{{ epauletImage }}" style="width: 120px; height: 55px;" />
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="callout callout-primary col-6 h-100">
+                                    <ul class="icons-list pb-0 text-left">
+                                        <li class="" style="height: 33%;">
+                                            <font class="font-2xl">{{ profile.RankDescription }} {{ profile.FullName }}</font>
+                                        </li>
+                                        <li class="" style="height: 33%;">
+                                            <font style="font-size: 18px;">Flying at {{ profile.CompanyName }}</font>
+                                            <span class="pl-2">
+                                                <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 1 ? 'text-success' : 'text-muted'"></span>
+                                                <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 2 ? 'text-success' : 'text-muted'"></span>
+                                                <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 3 ? 'text-success' : 'text-muted'"></span>
+                                                <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 4 ? 'text-success' : 'text-muted'"></span>
+                                                <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 5 ? 'text-success' : 'text-muted'"></span>
+                                            </span>
+                                        </li>
+                                        <li class="" style="height: 33%; font-size: 16px;">
+                                            <!-- Licenses -->
+                                            <div class="row pl-3">
+                                                <div class="pr-4">
+                                                    <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                    <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'text-success' : 'text-danger'">Student</span>
+                                                </div>
+                                                <div class="pr-4">
+                                                    <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                    <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'text-success' : 'text-danger'">Private</span>
+                                                </div>
+                                                <div class="pr-4">
+                                                    <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                    <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'text-success' : 'text-danger'">Commerical</span>
+                                                </div>
+                                                <div>
+                                                    <span class="" ng-class="profile.IsATPPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                    <span class="" ng-class="profile.IsATPPilotLicense === true ? 'text-success' : 'text-danger'">ATP</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-2">
+                                    <div class="callout callout-info">
+                                        <i class="fas fa-hourglass"></i>
+                                        <small class="text-muted">Age - ({{ profile.BirthDate !== '0001-01-01T00:00:00' ? (profile.BirthDate | date:'MM-dd-yyyy') : '' }})</small>
+                                        <br>
+                                        <strong class="h4">{{ profile.Age }} yrs.</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="callout callout-info">
+                                        <ul class="icons-list pb-0 text-left">
+                                            <li class="h-100">
+                                                <div class="float-left">
+                                                    <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px;" />
+                                                </div>
+                                                <div>
+                                                    <small class="text-muted">Service Years</small>
+                                                    <br>
+                                                    <strong class="h4">{{ profile.YearsInService | currency : "" : 2  }} yrs</strong>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.row-->
+                            <div class="row" style="margin-left: -30px;">
+                                <div class="col-12">
+                                    <h4 class="card-title mb-0">{{ profile.CareerName }} Career</h4>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <div class="row" style="margin-left: -30px;">
+                                <div class="col-12">
+                                    <div class="row" ng-controller="LogbookCareerCtrl">
+                                        <div class="col-2">
+                                            <div class="callout">
+                                                <i class="fas fa-plane"></i>
+                                                <small class="text-muted">Hours</small>
+                                                <br>
+                                                <strong class="h4">{{ logbook.FlightTimeHrs | currency : "" : 2 }}</strong>
+                                            </div>
+                                        </div>
+                                        <!--/.col-->
+                                        <div class="col-2">
+                                            <div class="callout callout-primary">
+                                                <i class="fas fa-star"></i>
+                                                <small class="text-muted">Rating</small>
+                                                <br>
+                                                <strong class="h4">{{ logbook.Rating  | currency : "" : 2  }}</strong>
+                                                <div class="bars">
+                                                    <div class="progress progress-xs">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating }}%" aria-valuenow="{{ logbook.Rating  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.col-->
+                                        <div class="col-2">
+                                            <div class="callout callout-info">
+                                                <i class="fas fa-clock"></i>
+                                                <small class="text-muted">On Time %</small>
+                                                <br>
+                                                <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                                <div class="bars">
+                                                    <div class="progress progress-xs">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.col-->
+                                        <div class="col-2">
+                                            <div class="callout callout-danger">
+                                                <i class="fas fa-map-marker"></i> / <i class="fas fa-home"></i>
+                                                <small class="text-muted">Location</small>
+                                                <br>
+                                                <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                            </div>
+                                        </div>
+                                        <!--/.col-->
+                                        <div class="col-4">
+                                            <div class="callout callout-info">
+                                                <i class="fas fa-plane"></i>
+                                                <small class="text-muted">Aircraft</small>
+                                                <span class="pr-2 text-muted">
+                                                    (
+                                                    <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fas fa-male fa-2x text-success' : 'fas fa-male'"></span>
+                                                    <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fas fa-male fa-2x text-success' : 'fas fa-male'"></span>
+                                                    )
+                                                </span>
+                                                <br>
+                                                <strong class="h4">{{ profile.Manufacturer }} {{ profile.Model }} / {{ profile.AircraftDescription }}</strong>
+                                            </div>
+                                        </div>
+                                        <!--/.col-->
+                                    </div>
+                                    <!--/.row-->
+                                </div>
+                            </div>
+                            <!--/.row-->
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <!--/.row-->
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+
+
+            <!--<profile-ctrl [career]="profile.CareerName"></profile-ctrl>
+            ************ Career Name = {{ profile.CareerName }} ******************-->
+
+        </div>
+
+
+
+
+
+        <!-- Career Banners -->
+        <div class="row" style="padding-bottom: 2em;" ng-controller="CareerBannerCtrl">
+            <div class="col-lg-2">
+                <div class="row" style="padding: 0px;">
+                    <div class="col-lg-2">
+                        <div class="col-lg-6 bg-primary" style="height: 440px;"></div>
+                        <div class="col-lg-6"></div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="text-white" ng-class="(User.CareerId == 1) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-flight-school" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/FlightSchoolCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Flight School</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[0].CompanyName) == true ? careers[0].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[0].RankDescription) == true ? careers[0].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[0].Rating) == true ? (careers[0].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[0].FlightTimeHrs) == true ? careers[0].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[0].OnTimePct) == true ? (careers[0].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[0].CareerStartDate) == true  && careers[0].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[0].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 1">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsFlightSchoolAvailable === false" ng-click="startNewCareer('', 1)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsFlightSchoolAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 1">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsFlightSchoolAvailable === false" ng-click="startNewJob('', 1)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsFlightSchoolAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 2) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-private" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/PrivateCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Private</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[1].CompanyName) == true ? careers[1].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[1].RankDescription) == true ? careers[1].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[1].Rating) == true ? (careers[1].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[1].FlightTimeHrs) == true ? careers[1].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[1].OnTimePct) == true ? (careers[1].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[1].CareerStartDate) == true  && careers[1].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[1].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 2">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsPrivateAvailable === false" ng-click="startNewCareer('', 2)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsPrivateAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 2">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsPrivateAvailable === false" ng-click="startNewJob('', 2)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsPrivateAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 3) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-instructor" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/FlightInstructorCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Flight Instructor</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[2].CompanyName) == true ? careers[2].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[2].RankDescription) == true ? careers[2].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[2].Rating) == true ? (careers[2].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[2].FlightTimeHrs) == true ? careers[2].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[2].OnTimePct) == true ? (careers[2].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[2].CareerStartDate) == true  && careers[2].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[2].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 3">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsInstructorAvailable === false" ng-click="startNewCareer('', 3)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsInstructorAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 3">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsInstructorAvailable === false" ng-click="startNewJob('', 3)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsInstructorAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 4) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-corporate" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/CorporateCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Corporate</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[3].CompanyName) == true ? careers[3].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[3].RankDescription) == true ? careers[3].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[3].Rating) == true ? (careers[3].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[3].FlightTimeHrs) == true ? careers[3].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[3].OnTimePct) == true ? (careers[3].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[3].CareerStartDate) == true  && careers[3].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[3].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 4">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsCorporateAvailable === false" ng-click="startNewCareer('', 4)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsCorporateAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 4">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsCorporateAvailable === false" ng-click="startNewJob('', 4)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsCorporateAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 5) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-cargo" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/CargoCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Cargo</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[4].CompanyName) == true ? careers[4].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[4].RankDescription) == true ? careers[4].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[4].Rating) == true ? (careers[4].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[4].FlightTimeHrs) == true ? careers[4].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[4].OnTimePct) == true ? (careers[4].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[4].CareerStartDate) == true  && careers[4].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[4].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 5">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsCargoAvailable === false" ng-click="startNewCareer('', 5)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsCargoAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 5">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsCargoAvailable === false" ng-click="startNewJob('', 5)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsCargoAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 6) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-regional" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/RegionalCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Regional</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[5].CompanyName) == true ? careers[5].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[5].RankDescription) == true ? careers[5].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[5].Rating) == true ? (careers[5].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[5].FlightTimeHrs) == true ? careers[5].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[5].OnTimePct) == true ? (careers[5].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[5].CareerStartDate) == true  && careers[5].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[5].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 6">
+                                    <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsRegionalAvailable === false" ng-click="startNewCareer('', 6)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsRegionalAvailable == false }">Start Career</button>
+                                </div>
+                                <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 6">
+                                    <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsRegionalAvailable === false" ng-click="startNewJob('', 6)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsRegionalAvailable == false }">Search Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-white" ng-class="(User.CareerId == 7) ? 'bg-success' : 'bg-primary'">
+                            <div class="card-header image-background-major" style="padding: 0px; width: 100%; height: 120px; background-color: #fff;">
+                                <!--<img src="../img/careers/MajorCareer.png" style="width: 100%; height: 100%;" />-->
+                            </div>
+                            <div class="card-body pb-0 text-center" style="height:270px; padding-top: 10px;">
+                                <div style="padding-bottom: 0px;"><h5>Major</h5></div>
+                                <hr class="mt-0">
+                                <div style="margin-top: -5pt;"><h6>{{ isDefined(careers[6].CompanyName) == true ? careers[6].CompanyName : '--' }}</h6></div>
+                                <div style="margin-top: -5pt; padding-bottom: 5px;">{{ isDefined(careers[6].RankDescription) == true ? careers[6].RankDescription : '--' }}</div>
+                                <div class="col-lg-12" style="padding: 0px;">
+                                    <hr class="mt-0">
+                                    <ul class="icons-list" style="margin-top: -10px;">
+                                        <li>
+                                            <i class="far fa-star"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Rating</div>
+                                                <strong>{{ isDefined(careers[6].Rating) == true ? (careers[6].Rating | currency : "" : 2) : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-paper-plane"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Hours</div>
+                                                <strong>{{ isDefined(careers[6].FlightTimeHrs) == true ? careers[6].FlightTimeHrs : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-clock"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">On Time %</div>
+                                                <strong>{{ isDefined(careers[6].OnTimePct) == true ? (careers[6].OnTimePct * 100 | currency : "" : 1)  + '%' : '--' }}</strong>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-calendar"></i>
+                                            <div class="carerBoxValue">
+                                                <div class="small text-muted">Career Started</div>
+                                                <strong>{{ isDefined(careers[6].CareerStartDate) == true  && careers[6].CareerStartDate !== '0001-01-01T00:00:00' ? (careers[6].CareerStartDate | date:'M/d/yyyy'): '--' }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                <div class="card-footer text-center" style="padding: 0px; width: 100%; height: 50px; background-color: #fff;">
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId != 7">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsMajorAvailable === false" ng-click="startNewCareer('', 7)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsMajorAvailable == false }">Start Career</button>
+                                    </div>
+                                    <div class="row m-auto" style="padding: 0px; width: 100%; height: 50px;" ng-show="User.CareerId == 7">
+                                        <button type="button" class="btn btn-block btn-success" ng-disabled="careersAvailable.IsMajorAvailable === false" ng-click="startNewJob('', 7)" ng-class="{ 'cursorNotAllowed btn-danger' : careersAvailable.IsMajorAvailable == false }">Search Jobs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lifestime Stats & Current Information -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="card-title mb-0">Lifetime Career</h4>
+                            </div><!--/.col-->
+                        </div>
+                        <div class="row pb-0">
+                            <!-- Pilot Pay -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Hours</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.LifeTimeFlightTimeHrs | currency : "" : 2  }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-primary">
+                                            <i class="fas fa-star"></i>
+                                            <small class="text-muted">Rating</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.LifeTimeRating | currency : "" : 2  }}</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.LifeTimeRating }}%" aria-valuenow="{{ profile.LifeTimeRating }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                            <!-- Flight Hours -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-clock"></i>
+                                            <small class="text-muted">On Time %</small>
+                                            <br>
+                                            <strong class="h4">{{ (profile.LifeTimeOnTimePct * 100).toFixed(1) }}%</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.LifeTimeOnTimePct * 100 }}%" aria-valuenow="{{ profile.LifeTimeOnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <!--<div class="col-sm-6">
+                                    <div class="callout callout-danger">
+                                        <i class="fa fa-map-marker"></i> / <i class="icon-home"></i>
+                                        <small class="text-muted">Location</small>
+                                        <br>
+                                        <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                    </div>
+                                </div>-->
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!--<div class="callout callout-info">
+                                        <i class="icon-plane"></i>
+                                        <small class="text-muted">Current Aircraft</small>
+                                        <span class="pr-2 text-muted">
+                                            (
+                                            <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                            <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                            )
+                                        </span>
+                                        <br>
+                                        <strong class="h4">{{ profile.AircraftFamily }} / {{ profile.Model }}</strong>
+                                        </div>-->
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                        <!-- Lifestime Hours -->
+                        <div class="row" ng-controller="LogbookPilotCtrl">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Single Engine Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.SingleEngineHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-primary">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Multi Engine Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.MultiEngineHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Retractable Gear Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.RetractableGearHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-danger">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Complex Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.ComplexHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">High Performance Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.HighPerformanceHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-danger">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Jet Hrs</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.JetHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+
+        <!-- Pilot Pay -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Pilot Pay -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <!--/.col-->
+                                    <div class="col-sm-12">
+                                        <div class="callout callout-danger">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            <small class="text-muted">Hourly Pay Rate</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.PayRate | currency : "$" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                                <hr class="mt-0">
+                                <ul class="icons-list">
+                                    <li>
+                                        <i class="fas fa-plane bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Aircraft Family Hours Multiplier</div>
+                                            <small>Current Aircraft</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.PayRateMultiplierHoursInServiceAircraft | currency : "x" : 2  }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                    <!--<li>
+                                    <i class="fa fa-area-chart bg-danger"></i>
+                                    <div class="desc">
+                                        <div class="title">Base Pay Rate</div>
+                                        <small>Current rank</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ profile.PayRateHr | currency : "$" : 2 }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                    </div>
+                                </li>-->
+                                    <li>
+                                        <i class="fas fa-plane bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Aircraft Multiplier</div>
+                                            <small>Family of aircraft you fly</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.PayRateMultiplierAircraft | currency : "x" : 2 }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-building bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Company Multiplier</div>
+                                            <small>Prestige level of company</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.PayRateMultiplierCompany | currency : "x" : 2 }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-clock-o bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Service Years Multiplier</div>
+                                            <small>Years working at current company</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.PayRateMultiplierYearsInService | currency : "x" : 2 }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.col-->
+                            <!-- Flight Hours -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-clock"></i>
+                                            <small class="text-muted">Flight Hours Allowed Monthly</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.FlightHrsAllowedMonthly | number : "" : 2 }} hrs</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-danger">
+                                            <i class="fas fa-clock"></i>
+                                            <small class="text-muted">Flight Hours Allowed Daily</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.FlightHrsAllowedDaily | number : "" : 2 }} hrs</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                                <hr class="mt-0">
+                                <ul class="horizontal-bars type-2">
+                                    <li>
+                                        <i class="fas fa-hourglass-start"></i>
+                                        <span class="title ng-binding">Flight Hours Remaining Today</span>
+                                        <span class="value">
+                                            {{ profile.FlightTimeRemainingToday | currency : "" : 2 }}
+                                            <span class="text-muted small">({{ ((profile.FlightTimeRemainingToday / profile.FlightHrsAllowedDaily) * 100).toFixed(1) }}%)</span>
+                                        </span>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ (profile.FlightTimeRemainingToday / profile.FlightHrsAllowedDaily) * 100 }}%" aria-valuenow="{{ (profile.FlightTimeRemainingToday / profile.FlightHrsAllowedDaily) * 100 }} hrs" aria-valuemin="0" aria-valuemax="{{ profile.FlightHrsAllowedDaily }}"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <i class="fas fa-hourglass-start"></i>
+                                        <span class="title ng-binding">Flight Hours Remaining This Month</span>
+                                        <span class="value">
+                                            {{ profile.FlightTimeRemainingThisMonth | currency : "" : 2 }}
+                                            <span class="text-muted small">({{ ((profile.FlightTimeRemainingThisMonth / profile.FlightHrsAllowedMonthly) * 100).toFixed(1) }}%)</span>
+                                        </span>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ (profile.FlightTimeRemainingThisMonth / profile.FlightHrsAllowedMonthly) * 100 }}%" aria-valuenow="{{ (profile.FlightTimeRemainingThisMonth / profile.FlightHrsAllowedMonthly) * 100 }} hrs" aria-valuemin="0" aria-valuemax="{{ profile.FlightHrsAllowedDaily }}"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <i class="fas fa-clock"></i>
+                                        <span class="title ng-binding">Hours Flown Today</span>
+                                        <span class="value">
+                                            {{ profile.HoursFlownToday | currency : "" : 2 }}
+                                            <span class="text-muted small">({{ ((profile.HoursFlownToday/profile.FlightHrsAllowedDaily) * 100).toFixed(1) }}%)</span>
+                                        </span>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ (profile.HoursFlownToday / profile.FlightHrsAllowedDaily) * 100 }}%" aria-valuenow="{{ (profile.HoursFlownToday / profile.FlightHrsAllowedDaily) * 100 }} hrs" aria-valuemin="0" aria-valuemax="{{ profile.FlightHrsAllowedDaily }}"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-clock"></i>
+                                        <span class="title ng-binding">Hours Flown This Month</span>
+                                        <span class="value">
+                                            {{ profile.HoursFlownThisMonth | currency : "" : 2 }}
+                                            <span class="text-muted small">({{ ((profile.HoursFlownThisMonth / profile.FlightHrsAllowedMonthly) * 100).toFixed(1) }}%)</span>
+                                        </span>
+                                        <div class="bars">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ (profile.HoursFlownThisMonth / profile.FlightHrsAllowedMonthly) * 100 }}%" aria-valuenow="{{ (profile.HoursFlownThisMonth / profile.FlightHrsAllowedMonthly) * 100 }} hrs" aria-valuemin="0" aria-valuemax="{{ profile.FlightHrsAllowedMonthly }}"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.col-->
+                            <!-- Budget -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-success">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            <small class="text-muted">Net Worth</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.NetWorth | currency : "$" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="callout callout-warning">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            <small class="text-muted">Estimated Monthly Budget</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.EstimatedMonthlyIncome - profile.LifestyleMonthlyAmount - profile.MonthlyRouteFee | currency : "$" : 0  }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                                <hr class="mt-0">
+                                <ul class="icons-list">
+                                    <li>
+                                        <i class="fas fa-dollar-sign bg-success"></i>
+                                        <div class="desc">
+                                            <div class="title">Estimated Monthly Income</div>
+                                            <small>Based on current roster</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.EstimatedMonthlyIncome | currency : "$" : 0  }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-home bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Monthly Lifestyle</div>
+                                            <small>Used to determine time allowance bonus</small>
+                                        </div>
+                                        <!--<div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <select class="form-control w-100" id="ddLifestyle" ng-model="lifestyles.selectedLifestyle" ng-options="lifestyle.MonthlyAmount for lifestyle in lifestyles track by lifestyle.MonthlyAmount"></select>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                    </div>-->
+                                        <!-- LifestyleMonthlyAmount update -->
+                                        <div ng-show="isEdit.LifestyleMonthlyAmount === false">
+                                            <div class="value">
+                                                <div class="small text-muted">&nbsp;</div>
+                                                <strong>{{ profile.LifestyleMonthlyAmount | currency : "$" : 0  }}</strong>
+                                            </div>
+                                            <div class="actions">
+                                                <button ng-show="isShowEditLifestyleMonthlyAmount" type="button" class="btn btn-link text-muted" ng-click="edit('LifestyleMonthlyAmount')"><i class="icon-settings"></i></button>
+                                                <i ng-show="!isShowEditLifestyleMonthlyAmount" class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                            </div>
+                                        </div>
+                                        <div ng-show="isEdit.LifestyleMonthlyAmount === true">
+                                            <div class="value w-25">
+                                                <select class="form-control w-100" id="ddLifestyle" ng-model="lifestyles.selectedLifestyle" ng-options="lifestyle.MonthlyAmount + ' (' + lifestyle.FlightTimeAllowanceBonusMin + ' mins)' for lifestyle in lifestyles track by lifestyle.MonthlyAmount"></select>
+                                            </div>
+                                            <div class="actionsEdit">
+                                                <span ng-click="update('LifestyleMonthlyAmount', lifestyles.selectedLifestyle.MonthlyAmount)"><i class="fas fa-check text-success"></i></span>
+                                                <span ng-click="cancel('LifestyleMonthlyAmount')"><i class="fas fa-close text-danger"></i></span>
+                                            </div>
+                                        </div>
+                                        <!-- (END) LifestyleMonthlyAmount update -->
+
+
+
+
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-map bg-danger"></i>
+                                        <div class="desc">
+                                            <div class="title">Monthly Route Fee</div>
+                                            <small>Monthly amount spent on routes</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.MonthlyRouteFee | currency : "$" : 0  }}</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-clock bg-warning"></i>
+                                        <div class="desc">
+                                            <div class="title">On Time Window Bonus</div>
+                                            <small>Bonus that is added to on time window</small>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <strong>{{ profile.TimeAllowanceBonusMin }} mins.</strong>
+                                        </div>
+                                        <div class="actions">
+                                            <i class="fas fa-circle text-muted mt-2 pl-4 actionIconSize"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+
+    </div>
+
+    <!-- Rank -->
+    <div class="card" ng-controller="CurrentCareerRankCntrl">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">{{ ranks[0].CareerName }} Ranking</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center"></th>
+                            <th>Rank</th>
+                            <th class="text-center">Rating</th>
+                            <th class="text-center">
+                                <div>Minimum</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Allowed</div><div>Daily Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Allowed</div><div>Monthly Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Allowed</div><div>Daily Flights</div>
+                            </th>
+                            <th class="text-center">Distance (nm)</th>
+                            <th class="text-center"># Hubs</th>
+                            <th class="text-center"># Routes</th>
+                            <th class="text-center">
+                                <div>Base</div><div>Pay Rate</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="usersTableCtrl">
+                        <tr ng-repeat="rank in ranks">
+                            <td class="text-center">
+                                <div class="">
+                                    <img ng-src="img/epaulets/RankEpaulet_{{ rank.CareerId }}_{{ rank.RankOrder }}.png" style="width: 70px; height: 30px;" alt="admin@bootstrapmaster.com">
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <strong>{{ rank.RankDescription }}</strong>
+                                    <span class="fa fa-level-up" ng-show="rank.IsAbleToPromote === true" style="padding-left: 5px;"></span>
+                                </div>
+                                <div class="small text-muted">
+                                    <span>Level {{ rank.RankOrder }}</span>
+                                </div>
+                            </td>
+                            <td class="text-center">{{ rank.Rating }}</td>
+                            <td class="text-center">{{ rank.FlightHrsMinimum }}</td>
+                            <td class="text-center">{{ rank.FlightHrsAllowedDaily }}</td>
+                            <td class="text-center">{{ rank.FlightHrsAllowedMonthly }}</td>
+                            <td class="text-center">{{ rank.FlightsAllowedDaily }}</td>
+                            <td class="text-center">{{ rank.FlightDistance }}</td>
+                            <td class="text-center">{{ rank.NumHubs }}</td>
+                            <td class="text-center">{{ rank.NumRoutes }}</td>
+                            <td class="text-center">${{ rank.PayRateHr }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- License -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Licenses</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Type</th>
+                            <th class="text-center">
+                                <div>Single Engine</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Multi-Engine</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Retractable</div><div>Gear Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Complex</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>High Performance</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Jet</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">Single Engine?</th>
+                            <th class="text-center">Multi-Engine?</th>
+                            <th class="text-center">Retractable Gear?</th>
+                            <th class="text-center">Complex?</th>
+                            <th class="text-center">High Performance?</th>
+                            <th class="text-center">Jet?</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="LicenseCtrl">
+                        <tr ng-repeat="license in licenses">
+                            <td><strong>{{ license.Name }}</strong></td>
+                            <td class="text-center">{{ license.SingleEngineHrs }}</td>
+                            <td class="text-center">{{ license.MultiEngineHrs }}</td>
+                            <td class="text-center">{{ license.RetractableGearHrs }}</td>
+                            <td class="text-center">{{ license.ComplexHrs }}</td>
+                            <td class="text-center">{{ license.HighPerformanceHrs }}</td>
+                            <td class="text-center">{{ license.JetHrs }}</td>
+
+                            <!--<td class="text-center"><span class="fa fa-check text-success" ng-show="license.IsSingleEngineAllowed === true"></span></td>-->
+                            <td class="text-center"><span ng-class="license.IsSingleEngineAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="license.IsMultiEngineAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="license.IsRetractableGearAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="license.IsComplexAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="license.IsHighPerformanceAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="license.IsJetAllowed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Careers -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Careers</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Type</th>
+                            <th class="text-center">
+                                <div>Total</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Single</div><div>Engine Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Multi</div><div>Engine Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Retractable</div><div>Gear Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Complex</div><div>Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>High</div><div>Performance Hrs</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Jet</div><div>Hrs</div>
+                            </th>
+                            <th class="text-left">Required License</th>
+                            <th class="text-center">
+                                <div>Aircraft Payrate</div><div>Multiplier Used?</div>
+                            </th>
+                            <th class="text-center">
+                                <div>Service Years</div><div>Used?</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="CareersCtrl">
+                        <tr ng-repeat="career in careers">
+                            <td><strong>{{ career.Name }}</strong></td>
+                            <td class="text-center">{{ career.TotalHrs }}</td>
+                            <td class="text-center">{{ career.SingleEngineHrs }}</td>
+                            <td class="text-center">{{ career.MultiEngineHrs }}</td>
+                            <td class="text-center">{{ career.RetractableGearHrs }}</td>
+                            <td class="text-center">{{ career.ComplexHrs }}</td>
+                            <td class="text-center">{{ career.HighPerformanceHrs }}</td>
+                            <td class="text-center">{{ career.JetHrs }}</td>
+                            <td class="text-left">
+                                <span class="fas fa-id-card text-success pr-2"></span>{{ career.LicenseName }}
+                            </td>
+                            <td class="text-center"><span ng-class="career.IsAircraftPayRateMultiplierUsed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                            <td class="text-center"><span ng-class="career.IsServiceYearsUsed === true ? 'fas fa-check text-success' : 'fas fa-close text-danger'"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Career History -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title mb-0">Career History</h4>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-left">Start Date</th>
+                            <th class="text-left">Career</th>
+                            <th class="text-left">Company</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="CareerHistoryCtrl">
+                        <tr ng-repeat="careerHistory in careerHistories">
+                            <td>{{ careerHistory.CareerStartDate !== '0001-01-01T00:00:00' ? (careerHistory.CareerStartDate | date:'MM-dd-yyyy') : '' }}</td>
+                            <td class="text-left">{{ careerHistory.CareerName }}</td>
+                            <td class="text-left">{{ careerHistory.CompanyName }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-demo">
+        <script type="text/ng-template" id="modalStartNewCareer.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title" ng-show="input.CareerType === 'Career'">Starting New Career</h3>
+                <h3 class="modal-title" id="modal-title" ng-show="input.CareerType === 'Job'">Starting New Job</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="ddCareers">Career</label>
+                        <select class="form-control w-100" disabled id="ddCareers" ng-model="selectedCareerId" ng-options="career.CareerId as career.Name for career in careers"></select>
+                    </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="ddCompanies">Company</label>
+                        <select class="form-control w-100" id="ddCompanies" ng-model="selectedCompany" ng-options="company.CompanyName for company in companies"></select>
+                    </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="homeBaseIcao">Home base ICAO</label>
+                        <input type="text" class="form-control" id="homeBaseIcao" ng-model="homeBaseIcao" placeholder="Enter home base ICAO code">
+                    </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <div>
+                            <label class="pr-2">Use currently owned aircrafts?</label>
+                            <label class="switch switch-icon switch-pill switch-primary mt-0">
+                                <input type="checkbox" class="switch-input" checked ng-model="isUseOwnAircraft">
+                                <span class="switch-label" data-on="&#xf00c" data-off="&#xf00d"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                        <div ng-show="isUseOwnAircraft === true">
+                            <div class="scrollbars">
+                                <table class="table table-hover table-outline mb-0 hidden-sm-down">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Model</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="hangarAllowedByCareer in hangarsAllowedByCareer">
+                                            <td class="">{{ hangarAllowedByCareer.Model }}</td>
+                                            <td class="">{{ hangarAllowedByCareer.AircraftDescription }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-outline" ng-show="isUseOwnAircraft === false">
+                            <div class="form-group col-sm-12 pt-2">
+                                <label for="ddAircrafts">Select Aircraft</label>
+                                <select class="form-control w-100" id="ddAircrafts" ng-model="selectedAircraft" ng-options="aircraft.Model group by aircraft.AircraftFamily for aircraft in aircrafts"></select>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="aircraftDescription">Description</label>
+                                <input type="text" class="form-control" id="aircraftDescription" ng-model="aircraftDescription" placeholder="Enter the descripton of aircraft">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-show="input.CareerType === 'Career'" ng-click="ok()">Start Career</button>
+                <button class="btn btn-primary" type="button" ng-show="input.CareerType === 'Job'" ng-click="ok()">Start New Job</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+﻿<!--
+ * CoreUI - Open Source Bootstrap Admin Template
+ * @version v1.0.6
+ * @link http://coreui.io
+ * Copyright (c) 2017 creativeLabs Łukasz Holeczek
+ * @license MIT
+ -->
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>CoreUI - Open Source Bootstrap Admin Template</title>
+
+    <!-- Main styles for this application -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link href="css/bootstrap.css" rel="stylesheet" />-->
+    <link href="css/bootstrap.3_1_1.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.override.css" rel="stylesheet">
+
+    <!-- Fonts -->
+
+</head>
+
+<!-- BODY options, add following classes to body to change options
+
+  // Header options
+  1. '.header-fixed'					- Fixed Header
+
+  // Sidebar options
+  1. '.sidebar-fixed'					- Fixed Sidebar
+  2. '.sidebar-hidden'				- Hidden Sidebar
+  3. '.sidebar-off-canvas'		- Off Canvas Sidebar
+  4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
+  5. '.sidebar-compact'			  - Compact Sidebar
+
+  // Aside options
+  1. '.aside-menu-fixed'			- Fixed Aside Menu
+  2. '.aside-menu-hidden'			- Hidden Aside Menu
+  3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+
+  // Breadcrumb options
+  1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+
+  // Footer options
+  1. 'footer-fixed'						- Fixed footer
+
+-->
+
+<body class="header-fixed sidebar-fixed aside-menu-hidden sidebar-minimized">
+    <!--<div message-directive></div>-->
+    <!-- User Interface -->
+    <ui-view class="app" ng-app="app" ng-controller="AppCtrl">
+
+    </ui-view>
+
+    <!-- Put before AngularJS files -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- AngularJS -->
+    <script src="node_modules/angular/angular.min.js"></script>
+
+    <!-- Bootstrap and necessary plugins -->
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>-->
+    <!-- AngularJS plugins -->
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="node_modules/angular-breadcrumb/dist/angular-breadcrumb.min.js"></script>
+    <script src="node_modules/angular-loading-bar/build/loading-bar.min.js"></script>
+
+    <!-- Google API -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6ZrxicziuxmqW_XY7FpT6j6QpWAiTRBQ&extension=.js"></script>
+    <!--<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>-->
+    <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+
+    <!--<script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-aria.min.js"></script>
+    <script src="Scripts/angular-material.min.js"></script>-->
+    <!--<script src="node_modules/angular-popeye/release/popeye.js"></script>-->
+    <!-- optional, if you want some default styles and animation -->
+    <!--<link rel="stylesheet" href="node_modules/angular-popeye/release/popeye.css" />-->
+    <!-- AngularJS CoreUI App scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/demo/routes.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+
+    <!-- services -->
+    <script src="js/services/aircraft.service.js"></script>
+    <script src="js/services/airport.service.js"></script>
+    <script src="js/services/appConfig.service.js"></script>
+    <script src="js/services/career.service.js"></script>
+    <script src="js/services/careerHistory.service.js"></script>
+    <script src="js/services/company.service.js"></script>
+    <script src="js/services/formula.service.js"></script>
+    <script src="js/services/gate.service.js"></script>
+    <script src="js/services/global.service.js"></script>
+    <script src="js/services/data.service.js"></script>
+    <script src="js/services/hangar.service.js"></script>
+    <script src="js/services/hub.service.js"></script>
+    <script src="js/services/license.service.js"></script>
+    <script src="js/services//lifestyle.service.js"></script>
+    <script src="js/services/logbook.service.js"></script>
+    <script src="js/services/login.service.js"></script>
+    <script src="js/services/manifest.service.js"></script>
+    <script src="js/services/map.service.js"></script>
+    <script src="js/services/message.service.js"></script>
+    <script src="js/services/passenger.service.js"></script>
+    <script src="js/services/pilot.service.js"></script>
+    <script src="js/services/pilotTypeRating.service.js"></script>
+    <script src="js/services/process.service.js"></script>
+    <script src="js/services/profile.service.js"></script>
+    <script src="js/services/rank.service.js"></script>
+    <script src="js/services/route.service.js"></script>
+    <script src="js/services/roster.service.js"></script>
+    <script src="js/services/sector.service.js"></script>
+    <script src="js/services/session.service.js"></script>
+    <script src="js/services/transaction.service.js"></script>
+    <script src="js/services/user.service.js"></script>
+
+    <!-- controllers -->
+    <script src="js/controllers/aircraft.js"></script>
+    <script src="js/controllers/airport.js"></script>
+    <script src="js/controllers/career.js"></script>
+    <script src="js/controllers/careerHistory.js"></script>
+    <script src="js/controllers/company.js"></script>
+    <script src="js/controllers/gate.js"></script>
+    <script src="js/controllers/hangar.js"></script>
+    <script src="js/controllers/hub.js"></script>
+    <script src="js/controllers/license.js"></script>
+    <script src="js/controllers/logbook.js"></script>
+    <script src="js/controllers/login.js"></script>
+    <script src="js/controllers/manifest.js"></script>
+    <script src="js/controllers/map.js"></script>
+    <script src="js/controllers/message.js"></script>
+    <script src="js/controllers/nav.js"></script>
+    <script src="js/controllers/passenger.js"></script>
+    <script src="js/controllers/pilot.js"></script>
+    <script src="js/controllers/pilotTypeRating.js"></script>
+    <script src="js/controllers/process.js"></script>
+    <script src="js/controllers/profile.js"></script>
+    <script src="js/controllers/rank.js"></script>
+    <script src="js/controllers/register.js"></script>
+    <script src="js/controllers/route.js"></script>
+    <script src="js/controllers/roster.js"></script>
+    <script src="js/controllers/transaction.js"></script>
+    <script src="js/controllers/user.js"></script>
+
+    <!-- directives -->
+    <script src="js/directives/message.directive.js"></script>
+
+    <!-- components -->
+    <script src="js/components/profile-component.js"></script>
+
+    <!-- other -->
+    <script src="https://kit.fontawesome.com/2cb527e7c8.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

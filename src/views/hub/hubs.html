@@ -1,0 +1,463 @@
+﻿<style type="text/css">
+
+    .image-background-hub {
+        background: url(img/hubs/terminal.jpg) no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
+<div class="animated fadeIn" ng-controller="HubCtrl">
+    <!-- Profile -->
+    <div class="card" ng-controller="ProfileCtrl">
+        <div class="card-body row pt-0 pb-0">
+            <div class="col-12 pt-0">
+                <div class="row">
+                    <div class="pl-3" style="width: 160px;">
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images" src="../img/profile/ProfileDefault.png" style="width: 120px; height: 150px; border: 0px solid none;" />
+                        </div>
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images pb-1" src="{{ epauletImage }}" style="width: 120px; height: 55px;" />
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="callout callout-primary col-6 h-100">
+                                <ul class="icons-list pb-0 text-left">
+                                    <li class="" style="height: 33%;">
+                                        <font class="font-2xl">{{ profile.RankDescription }} {{ profile.FullName }}</font>
+                                    </li>
+                                    <li class="" style="height: 33%;">
+                                        <font style="font-size: 18px;">Flying at {{ profile.CompanyName }}</font>
+                                        <span class="pl-2">
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 1 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 2 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 3 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 4 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fa fa-star" ng-class="profile.PrestigeLevel >= 5 ? 'text-success' : 'text-muted'"></span>
+                                        </span>
+                                    </li>
+                                    <li class="" style="height: 33%; font-size: 16px;">
+                                        <!-- Licenses -->
+                                        <div class="row pl-3">
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'text-success' : 'text-danger'">Student</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'text-success' : 'text-danger'">Private</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'text-success' : 'text-danger'">Commerical</span>
+                                            </div>
+                                            <div>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'fa fa-drivers-license text-success' : 'fa fa-drivers-license text-danger'"></span>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'text-success' : 'text-danger'">ATP</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-2">
+                                <div class="callout callout-info">
+                                    <i class="icon-hourglass"></i>
+                                    <small class="text-muted">Age - ({{ profile.BirthDate !== '0001-01-01T00:00:00' ? (profile.BirthDate | date:'MM-dd-yyyy') : '' }})</small>
+                                    <br>
+                                    <strong class="h4">{{ profile.Age }} yrs.</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="callout callout-info">
+                                    <ul class="icons-list pb-0 text-left">
+                                        <li class="h-100">
+                                            <div class="float-left">
+                                                <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px;" />
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Service Years</small>
+                                                <br>
+                                                <strong class="h4">{{ profile.YearsInService | currency : "" : 2  }} yrs</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <h4 class="card-title mb-0">{{ profile.CareerName }} Career</h4>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <div class="row" ng-controller="LogbookCareerCtrl">
+                                    <div class="col-2">
+                                        <div class="callout">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Hours</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.FlightTimeHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-primary">
+                                            <i class="icon-star"></i>
+                                            <small class="text-muted">Rating</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.Rating  | currency : "" : 2  }}</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating  }}%" aria-valuenow="{{ logbook.Rating  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-info">
+                                            <i class="icon-clock"></i>
+                                            <small class="text-muted">On Time %</small>
+                                            <br>
+                                            <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-danger">
+                                            <i class="fa fa-map-marker"></i> / <i class="icon-home"></i>
+                                            <small class="text-muted">Location</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-4">
+                                        <div class="callout callout-info">
+                                            <i class="icon-plane"></i>
+                                            <small class="text-muted">Aircraft</small>
+                                            <span class="pr-2 text-muted">
+                                                (
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                )
+                                            </span>
+                                            <br>
+                                            <strong class="h4">{{ profile.Manufacturer }} {{ profile.Model }} / {{ profile.AircraftDescription }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <!--/.col-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
+
+    <!-- Home Base -->
+    <div class="row" ng-controller="HubHomeBaseCtrl">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="card-title mb-0">Home Base</h4>
+                        </div><!--/.col-->
+                    </div>
+                    <div class="row pb-0">
+                        <!-- Current Aircraft -->
+                        <div class="col-sm-6 col-lg-1">
+                            <div class="callout callout-info">
+                                <i class="fa fa-building"></i>
+                                <small class="text-muted">Icao</small>
+                                <br>
+                                <strong class="h4">{{ hub.Icao }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="callout callout-info">
+                                <i class="icon-plane"></i>
+                                <small class="text-muted">Name</small>
+                                <br>
+                                <strong class="h4">{{ hub.AirportName }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="callout callout-info">
+                                <i class="icon-plane"></i>
+                                <small class="text-muted">Country</small>
+                                <br>
+                                <strong class="h4">{{ hub.Country }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="callout callout-info">
+                                <i class="icon-plane"></i>
+                                <small class="text-muted">City / State</small>
+                                <br>
+                                <strong class="h4">{{ hub.City }}</strong> / <strong class="h4">{{ hub.State }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                    <!-- Hub information -->
+                    <div class="row pb-0">
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">Altitude</div>
+                                        <small>Altitude of airport</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hub.Altitude }} ft</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">UTC Offset</div>
+                                        <small>UTC Offset at airport</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hub.UTCOffset }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <hr class="mt-0">
+                            <ul class="icons-list">
+                                <li>
+                                    <i class="bg-success"></i>
+                                    <div class="desc">
+                                        <div class="title">UTC Offset DST</div>
+                                        <small>UTD DST offset at airport</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">&nbsp;</div>
+                                        <strong>{{ hub.UTCOffsetDST }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+
+    <!-- Hubs -->
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <!-- Net Worth -->
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="card-title mb-0">Hubs</h4>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-2">
+                            <div class="callout callout-success">
+                                <small class="text-muted">Allowed / Remaining</small>
+                                <br>
+                                <strong class="h4">{{ rank.NumHubs }} / {{ hubRemaining }}</strong>
+                                <span ng-show="hubRemaining > 0">
+                                    <btn class="btn text-success fa fa-plus cursorPointer" ng-click="createHubModal('')"></btn>
+                                </span>
+                                <span ng-show="hubRemaining <= 0">
+                                    <btn class="btn text-danger fa fa-plus"></btn>
+                                </span>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <div class="" style="margin-top:20px;">
+                <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="hubs.length > 0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Icao</th>
+                            <th>Airport Name</th>
+                            <th class="text-center">Opened</th>
+                            <th class="text-center">Closed</th>
+                            <th class="text-center">Available</th>
+                            <th class="text-center">Closing</th>
+                            <th class="text-center">Home Base?</th>
+                            <th class="text-center">Active?</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="hub in hubs">
+                            <td>{{ hub.Icao }}</td>
+                            <td>{{ hub.AirportName }}</td>
+                            <td class="text-center">{{ hub.DateOpened !== '0001-01-01T00:00:00' ? (hub.DateOpened | date:'MM-dd-yyyy') : '' }}</td>
+                            <td class="text-center">{{ hub.DateClosed !== '0001-01-01T00:00:00' ? (hub.DateClosed | date:'MM-dd-yyyy') : '' }}</td>
+                            <td class="text-center">{{ hub.DateAvailable !== '0001-01-01T00:00:00' ? (hub.DateAvailable | date:'MM-dd-yyyy') : '' }}</td>
+                            <td class="text-center">{{ hub.DateClosing !== '0001-01-01T00:00:00' ? (hub.DateClosing | date:'MM-dd-yyyy') : '' }}</td>
+                            <td class="text-center"><span ng-class="hub.IsHomeBase === true ? 'fa fa-check text-success' : ''"></span></td>
+                            <td class="text-center"><span ng-class="hub.IsActive === true ? 'fa fa-check text-success' : ''"></span></td>
+                            <td>
+                                <!-- No flights have been flown -->
+                                <span ng-show="hub.FlightCount < 1">
+                                    <i class="fa fa-times cursorPointer pr-1 text-danger" ng-click="confirmDeleteHubModal('sm', hub)"></i>
+                                </span>
+                                <!-- At least 1 flight have been flown -->
+                                <span ng-show="hub.FlightCount > 0">
+                                    <i class="fa fa-chain-broken cursorPointer" ng-show="hub.IsPendingOpen === false && hub.IsPendingClose === false" ng-click="confirmDisableHubModal('sm', hub)"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center w-100" ng-show="hubs.length === 0">
+                    <span>No hubs have been created</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-demo">
+    <script type="text/ng-template" id="modalDeleteHub.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Delete Hub</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label>Are you sure you want to delete the {{ hub.AirportNam }} hub?</label>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="delete()">Delete Hub</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+<div class="modal-demo">
+    <script type="text/ng-template" id="modalDisableHub.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Close Hub</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label>Are you sure you want to close the {{ hub.AirportNam }} hub?</label>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="disable()">Close Hub</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+<div class="modal-demo">
+    <script type="text/ng-template" id="modalHub.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Hub</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="ddHubs">Current Hubs</label>
+                    <!--<select class="form-control w-100" id="ddHubs" ng-model="selectedHub" ng-change="hubChange()" ng-options="hub.AirportName for hub in hubs"></select>-->
+
+                    <div class="scrollbars" id="ddHubs">
+                        <table class="table table-hover table-outline mb-0 hidden-sm-down">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Airport</th>
+                                    <th class="text-center">Distance</th>
+                                    <th class="text-center"><div>Monthly</div><div>Route Fee</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="hub in hubs">
+                                    <td class="">{{ hub.AirportName }}</td>
+                                    <td class="text-center">{{ hub.Distance | currency : "" : 1  }}</td>
+                                    <td class="text-center">{{ hub.RouteFee | currency : "$" : 0  }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label for="icao">New Hub</label>
+                    <input type="text" class="form-control text-center" id="icao" ng-model="hubEdit.Icao" ng-blur='getAirport(hubEdit.Icao)' ng-change="hubEdit.Icao=(hubEdit.Icao | uppercase)">
+                </div>
+                <div class="form-group col-sm-9">
+                    <label for="icaoAirportName">Airport Name</label>
+                    <input type="text" class="form-control" disabled id="icaoAirportName" ng-model="hubEdit.IcaoAirportName">
+                </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label for="distanceAllowed">Distance Allowed</label>
+                    <input type="text" class="form-control text-center" disabled id="distanceAllowed" ng-model="distanceAllowed">
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="isSaveAllowed === false" ng-click="save()">Save Hub</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>

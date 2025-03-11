@@ -1,0 +1,69 @@
+﻿
+<style type="text/css">
+    #map {
+        height: 700px;
+        width: 100%;
+    }
+
+    .infoWindowContent {
+        font-size: 14px !important;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
+
+    h2 {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+</style>
+
+<!--<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?callback=initMap&amp;key=AIzaSyC6ZrxicziuxmqW_XY7FpT6j6QpWAiTRBQ"></script>-->
+
+<div class="container-fluid">
+
+    <!--To use the Google Maps JavaScript API, you must register your app project on the Google API Console and get a Google API key which you can add to your app-->
+    <div class="animated fadeIn">
+        <div class="card">
+            <div class="card-header">
+                <i class="icon-map"></i>Route Map
+                <div class="card-actions">
+                    <a href="https://google-developers.appspot.com/maps/documentation/javascript/reference" target="_blank">
+                        <small class="text-muted">docs</small>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body" ng-controller="RouteMapCtrl">
+                <ng-map id="map" zoom="{{ mapZoom }}" center="[{{ mapCenter.lat }}, {{ mapCenter.long }}]">
+                    <div ng-repeat="marker in markers">
+                        <marker position="{{ marker.lat }}, {{ marker.long }}" title="{{ marker.desc }}" icon="{{ marker.icon }}"></marker>
+                    </div>
+                    <shape name="polygon" ng-repeat="route in routes"
+                           paths="[[{{ route.IcaoFromLatitude }}, {{ route.IcaoFromLongitude }}], [{{ route.IcaoToLatitude }}, {{ route.IcaoToLongitude }}]]"
+                           stroke-color="#FF0000"
+                           stroke-opacity="0.8"
+                           stroke-weight="2"
+                           fill-color="#FF0000"
+                           fill-opacity="0.38">
+                    </shape>
+                    <shape name="circle" ng-repeat="hub in hubs"
+                           no-watcher="true"
+                           stroke-color="#ffb3b3"
+                           stroke-opacity="0.8"
+                           stroke-weight="3"
+                           fill-color="#ffb3b3"
+                           fill-opacity="0.20"
+                           center="[{{ hub.Latitude }}, {{ hub.Longitude }}]"
+                           radius="{{ getRadius() }}">
+                    </shape>
+
+                    <!--<marker position="[40.71, -74.21]" title="hello"></marker>
+    <marker position="[40.72, -74.20]" title="marker" animation="Animation.DROP"></marker>
+    <marker position="[40.73, -74.19]" title="drag me" draggable="true"></marker>
+    <marker position="[40.74, -74.18]" title="how" animation="Animation.BOUNCE"></marker>
+    <marker position="[40.76, -74.16]" title="you"
+    icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"></marker>-->
+                </ng-map>
+            </div>
+        </div>
+    </div>
+</div>

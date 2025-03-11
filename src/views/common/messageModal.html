@@ -1,0 +1,6 @@
+﻿<div style="position: fixed; top: 10px; left: 0; width: 100%; margin-top: 10px; z-index: 999;">
+    <div uib-alert ng-repeat="alert in alertsModal" class="alert center-block" ng-class="'alert-' + [alert.type]"
+         close="closeAlert($index)" dismiss-on-timeout="{{ alert.duration }}" style="width: 500px; height: 60px; text-align: center;">
+        <div style="font-weight: 600; font-size: 11pt;" class="pt-2">{{ alert.text }}</div>
+    </div>
+</div>

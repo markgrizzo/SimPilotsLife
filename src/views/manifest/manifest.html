@@ -1,0 +1,848 @@
+﻿<style type="text/css">
+
+    .image-boarding-pass-background {
+        background: url(img/BoardingPass.png) no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        height: 561px;
+        width: 1356px;
+    }
+
+    .image-background-company {
+        background: url(img/companies/company_11.png) no-repeat;
+        display: block;
+        height: 100px;
+        width: 100%;
+        -moz-box-sizing: border-box;
+        /*-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;*/
+    }
+
+    .image-background-company2 {
+        display: block;
+        height: 100px;
+        -moz-box-sizing: border-box;
+    }
+
+    .flightresultgridview .flightPathWrapper .flightPathStop {
+        height: 5px;
+        padding: 0;
+        border-bottom: 1px solid #1b345d;
+        margin: 0 auto;
+    }
+
+    .flightresultgridview .flightPathWrapper .flightMark {
+        width: 8px;
+        height: 8px;
+        background-color: #036;
+    }
+
+    .flightresultgridview .flL {
+        float: left;
+    }
+
+    .flightresultgridview .flightPathWrapper .flightMark.abslRight {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .flightresultgridview .flightPathWrapper .flightMarkStop {
+        width: 8px;
+        height: 8px;
+        background-color: #036;
+        margin: 0 auto;
+    }
+
+
+    .manifestCard {
+        border-top: 5px solid #4dbd74;
+        box-shadow: 4px 4px 10px #8E8E8E;
+        clear: both;
+        margin-top: 0px;
+        margin-bottom: 0.5rem !important;
+        padding: 0px;
+    }
+    .manifestCard img {
+        height: 100%;
+        padding-right: 0px;
+        float: left;
+    }
+    .manifestCard a {
+        /*display: block;
+        border: 0px solid #151515;
+        margin-bottom: 0px;
+        border-radius: 0px;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;*/
+        /*-webkit-box-shadow: 4px 2px 6px #8E8E8E;*/
+        /*box-shadow: 4px 4px 10px #8E8E8E;*/
+        /*background-image: -webkit-linear-gradient(0deg,rgba(40,121,216,1.00) 0%,rgba(25,77,138,1.00) 99.48%);
+        background-image: -moz-linear-gradient(0deg,rgba(40,121,216,1.00) 0%,rgba(25,77,138,1.00) 99.48%);
+        background-image: -o-linear-gradient(0deg,rgba(40,121,216,1.00) 0%,rgba(25,77,138,1.00) 99.48%);
+        background-image: linear-gradient(90deg,rgba(40,121,216,1.00) 0%,rgba(25,77,138,1.00) 99.48%);*/
+        color: #000;
+    }
+    .manifestCard a:hover {
+        background: #3374C2;
+        color: #fff;
+        text-decoration:none;
+    }
+
+</style>
+
+<div ng-controller="ManifestCtrl">
+    <!-- Profile -->
+    <div class="card" ng-controller="ProfileCtrl">
+        <div class="card-body row pt-0 pb-0">
+            <div class="col-12 pt-0">
+                <div class="row">
+                    <div class="pl-3" style="width: 160px;">
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images" src="../img/profile/ProfileDefault.png" style="width: 120px; height: 150px; border: 0px solid none;" />
+                        </div>
+                        <div class="mt-2" style="vertical-align: bottom;">
+                            <img class="epaulet-images pb-1" src="{{ epauletImage }}" style="width: 120px; height: 55px;" />
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="callout callout-primary col-6 h-100">
+                                <ul class="icons-list pb-0 text-left">
+                                    <li class="" style="height: 33%;">
+                                        <font class="font-2xl">{{ profile.RankDescription }} {{ profile.FullName }}</font>
+                                    </li>
+                                    <li class="" style="height: 33%;">
+                                        <font style="font-size: 18px;">Flying at {{ profile.CompanyName }}</font>
+                                        <span class="pl-2">
+                                            <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 1 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 2 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 3 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 4 ? 'text-success' : 'text-muted'"></span>
+                                            <span class="fas fa-star" ng-class="profile.PrestigeLevel >= 5 ? 'text-success' : 'text-muted'"></span>
+                                        </span>
+                                    </li>
+                                    <li class="" style="height: 33%; font-size: 16px;">
+                                        <!-- Licenses -->
+                                        <div class="row pl-3">
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                <span class="" ng-class="profile.IsStudentPilotLicense === true ? 'text-success' : 'text-danger'">Student</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                <span class="" ng-class="profile.IsPrivatePilotLicense === true ? 'text-success' : 'text-danger'">Private</span>
+                                            </div>
+                                            <div class="pr-4">
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                <span class="" ng-class="profile.IsCommercialPilotLicense === true ? 'text-success' : 'text-danger'">Commerical</span>
+                                            </div>
+                                            <div>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'fas fa-id-card text-success' : 'fas fa-id-card text-danger'"></span>
+                                                <span class="" ng-class="profile.IsATPPilotLicense === true ? 'text-success' : 'text-danger'">ATP</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-2">
+                                <div class="callout callout-info">
+                                    <i class="fas fa-hourglass"></i>
+                                    <small class="text-muted">Age - ({{ profile.BirthDate !== '0001-01-01T00:00:00' ? (profile.BirthDate | date:'MM-dd-yyyy') : '' }})</small>
+                                    <br>
+                                    <strong class="h4">{{ profile.Age }} yrs.</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="callout callout-info">
+                                    <ul class="icons-list pb-0 text-left">
+                                        <li class="h-100">
+                                            <div class="float-left">
+                                                <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px;" />
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Service Years</small>
+                                                <br>
+                                                <strong class="h4">{{ profile.YearsInService | currency : "" : 2  }} yrs</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <h4 class="card-title mb-0">{{ profile.CareerName }} Career</h4>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                        <div class="row" style="margin-left: -30px;">
+                            <div class="col-12">
+                                <div class="row" ng-controller="LogbookCareerCtrl">
+                                    <div class="col-2">
+                                        <div class="callout">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Hours</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.FlightTimeHrs | currency : "" : 2 }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-primary">
+                                            <i class="fas fa-star"></i>
+                                            <small class="text-muted">Rating</small>
+                                            <br>
+                                            <strong class="h4">{{ logbook.Rating  | currency : "" : 2  }}</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.Rating  }}%" aria-valuenow="{{ logbook.Rating  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-clock"></i>
+                                            <small class="text-muted">On Time %</small>
+                                            <br>
+                                            <strong class="h4">{{ (logbook.OnTimePct * 100).toFixed(1) }}%</strong>
+                                            <div class="bars">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ logbook.OnTimePct * 100 }}%" aria-valuenow="{{ logbook.OnTimePct * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-2">
+                                        <div class="callout callout-danger">
+                                            <i class="fas fa-map-marker"></i> / <i class="fas fa-home"></i>
+                                            <small class="text-muted">Location</small>
+                                            <br>
+                                            <strong class="h4">{{ profile.CurrentLocationIcao }} / {{ profile.HomeBaseIcao }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                    <div class="col-4">
+                                        <div class="callout callout-info">
+                                            <i class="fas fa-plane"></i>
+                                            <small class="text-muted">Aircraft</small>
+                                            <span class="pr-2 text-muted">
+                                                (
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat === true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                <span class="pl-1" ng-class="profile.IsLeftSeat != true ? 'fa fa-male fa-2x text-success' : 'fa fa-male'"></span>
+                                                )
+                                            </span>
+                                            <br>
+                                            <strong class="h4">{{ profile.Manufacturer }} {{ profile.Model }} / {{ profile.AircraftDescription }}</strong>
+                                        </div>
+                                    </div>
+                                    <!--/.col-->
+                                </div>
+                                <!--/.row-->
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <!--/.col-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
+
+    <!-- Flight Board & Passengers -->
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12 mb-4" ng-init="selectedTab = 1;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="Schedule" aria-selected="true" ng-class="{active: selectedTab == 1}" class="nav-link" href="#" ng-click="selectedTab = 1;"><i class="fa fa-list pr-1"></i><font class="pr-2">Schedule</font><span class="badge badge-pill badge-success">{{ manifests.length }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="Manifest" aria-selected="false" ng-class="{active: selectedTab == 2}" class="nav-link" href="#" ng-click="selectedTab = 2;"><i class="icon-doc"></i><font class="pr-2">Manifest</font></a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="Flights" aria-selected="false" ng-class="{active: selectedTab == 3}" class="nav-link" href="#" ng-click="selectedTab = 3;"><i class="icon-plane"></i><font class="pr-2">Previous Flights</font><span class="badge badge-pill badge-success">{{ logbookSectors.length }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="Passengers" aria-selected="false" ng-class="{active: selectedTab == 4}" class="nav-link" href="#" ng-click="selectedTab = 4;"><i class="icon-people pr-1"></i><font class="pr-2">Passengers</font><span class="badge badge-pill badge-success">{{ passengers.length }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="IcaoFrom" aria-selected="false" ng-class="{active: selectedTab == 5}" class="nav-link" href="#" ng-click="selectedTab = 5;"><i class="icon-pie-chart"></i>{{ icaoFrom }} - Charts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="tab" aria-controls="IcaoTo" aria-selected="false" ng-class="{active: selectedTab == 6}" class="nav-link" href="#" ng-click="selectedTab = 6;"><i class="icon-pie-chart"></i>{{ icaoTo }} - Charts</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div ng-class="{active: selectedTab == 1}" class="tab-pane" ng-show="selectedTab == 1" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-sm-12">
+                                        <img class="epaulet-images" src="{{ companyImage }}" style="width: 120px; height: 65px; float: left;" />
+                                        <h4 class="card-title pl-2 mt-3 mb-0" style="float:left;">Daily Schedule<span class="font-sm pl-1">(UTC)</span></h4>
+                                    </div><!--/.col-->
+                                </div><!--/.row-->
+                                <!-- Flights -->
+                                <div class="" ng-repeat="manifest in manifests" style="background-color:#eee;" ng-show="manifests.length > 0">
+                                    <div class="col-lg-12 pb-0">
+                                        <div class="pb-0">
+                                            <div class="row pb-0" style="border:0px solid green;">
+                                                <!-- Pre-flight -->
+                                                <div class="card col-lg-1 manifestCard">
+                                                    <div class="col-12 text-center">
+                                                        <div class="pb-5 pt-2" style="font-size:0.75rem">
+                                                            Pre-flight
+                                                        </div>
+                                                        <div class="font-2xl">
+                                                            {{ manifest.PreFlightTimeUTC !== '0001-01-01T00:00:00' ? (manifest.PreFlightTimeUTC | date:"HH:mm'z'") : '' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Flight info -->
+                                                <div class="card col-lg-7 manifestCard">
+                                                    <a class="h-100 pb-1" href="#" ng-click="viewManifest(manifest.ManifestId)">
+                                                        <!-- City/Flight#/Aircraft -->
+                                                        <div class="col-12 pb-2">
+                                                            <div class="col-6 p-0" style="border:0px solid red; float:left;">
+                                                                <span class="font-3xl">{{ manifest.IcaoFrom }} to {{ manifest.IcaoTo }}</span>
+                                                                <div class="font-1xl">{{ manifest.IcaoFromCity }} <i class="fa fa-arrow-right"></i> {{ manifest.IcaoToCity }}</div>
+                                                            </div>
+                                                            <div class="col-6 p-0 mt-3 text-right" style="border:0px solid green; float:left;">
+                                                                {{ manifest.FlightNum }}
+                                                                <div>{{ manifest.Manufacturer }} {{ manifest.Model }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Departure/Arrival time-->
+                                                        <div class="col-12 pb-5 pt-2" style="clear:both;">
+                                                            <div class="col-5 p-0 font-3xl" style="float:left;">
+                                                                {{ manifest.BlockOffTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOffTimeUTC | date:"HH:mm'z'") : '' }}
+                                                            </div>
+                                                            <div class="col-2 p-0 text-center" style="float:left; width:100%; font-size:1.2rem">
+                                                                <i class="fa fa-plane"></i>
+                                                            </div>
+                                                            <div class="col-5 p-0 text-right font-3xl" style="float:left;">
+                                                                {{ manifest.BlockOnTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOnTimeUTC | date:"HH:mm'z'") : '' }}
+                                                            </div>
+                                                        </div>
+                                                        <!-- Flight Path Bar-->
+                                                        <div class="col-12 pb-2">
+                                                            <div class="col-12 flightPathStop" style="height:5px; border-bottom:1px solid #1b345d; padding: 0; margin: auto;">
+                                                                <div class="flightMark flL" style="width: 8px; height: 8px; background-color: #036;"></div>
+                                                                <div class="flightMark flL" style="width: 8px; height: 8px; background-color: #036; position:absolute; right:0; top:0;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- ICAO/Flight Time-->
+                                                        <div class="col-12 pb-2">
+                                                            <div class="col-5 p-0" style="float:left; width:100%; font-size:.75rem">
+                                                                {{ manifest.IcaoFrom }}
+                                                            </div>
+                                                            <div class="col-2 p-0 text-center" style="float:left; font-size:1.0rem">
+                                                                {{ (manifest.FlightTime | date:'h') === '12' ? '00' : (manifest.FlightTime | date:'h') }}h {{ (manifest.FlightTime | date:'mm') }}m
+                                                            </div>
+                                                            <div class="col-5 p-0 text-right" style="float:left; font-size:.75rem">
+                                                                {{ manifest.IcaoTo }}
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Rating -->
+                                                <div class="card col-lg-1 manifestCard">
+                                                    <div class="col-12 text-center">
+                                                        <div class="pb-5 pt-2" style="font-size:0.75rem">
+                                                            Rating
+                                                        </div>
+                                                        <div class="font-2xl">
+                                                            {{ manifest.Rating | currency : "" : 2  }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- On Time % -->
+                                                <div class="card col-lg-1 manifestCard">
+                                                    <div class="col-12 text-center">
+                                                        <div class="pb-5 pt-2" style="font-size:0.75rem">
+                                                            On Time
+                                                        </div>
+                                                        <div class="font-2xl">
+                                                            {{ (manifest.OnTimePct * 100).toFixed(1) }}%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Current Leg? -->
+                                                <div class="card col-lg-1 manifestCard">
+                                                    <div class="col-12 text-center">
+                                                        <div class="pb-5 pt-2" style="font-size:0.75rem">
+                                                            Current?
+                                                        </div>
+                                                        <div class="font-3xl">
+                                                            <span ng-class="manifest.IsCurrentLeg === true ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Is Completed? -->
+                                                <div class="card col-lg-1 manifestCard">
+                                                    <div class="col-12 text-center">
+                                                        <div class="pb-5 pt-2" style="font-size:0.75rem">
+                                                            Completed?
+                                                        </div>
+                                                        <div class="font-3xl">
+                                                            <span ng-class="manifest.IsCompleted === true ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.row-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center w-100" ng-show="manifests.length === 0">
+                                    <span>No manifest has been created</span>
+                                </div>
+                                <!--/.col-->
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-class="{active: selectedTab == 2}" class="tab-pane" ng-show="selectedTab == 2" role="tabpanel">
+                        <!-- Manifest -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12" ng-show="manifests.length > 0">
+                                                <h4 class="card-title mb-0"><span ng-class="manifest.IsCurrentLeg === true ? 'text-success' : ''" ng-show="manifest.IsCurrentLeg === true">Current&nbsp;</span>Manifest</h4>
+                                            </div><!--/.col-->
+                                            <div class="col-sm-12" ng-show="manifests.length === 0">
+                                                <h4 class="card-title mb-0">No Manifest is Available</h4>
+                                            </div><!--/.col-->
+                                        </div>
+                                        <div class="row pb-0">
+                                            <!-- Current Flight -->
+                                            <div class="col-sm-6 col-lg-2">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-plane"></i>
+                                                            <small class="text-muted">Flight Number</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.FlightNum }}</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-5">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-building"></i>
+                                                            <small class="text-muted">From</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.IcaoFrom }} - {{ manifest.IcaoFromAirportName }} / {{ manifest.IcaoFromCity }}</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-5">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-building"></i>
+                                                            <small class="text-muted">To</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.IcaoTo }} - {{ manifest.IcaoToAirportName }} / {{ manifest.IcaoToCity }}</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.row-->
+                                        <div class="row pb-0">
+                                            <!-- Current Flight -->
+                                            <div class="col-sm-12 col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-tape"></i>
+                                                            <small class="text-muted">Distance</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.Distance | currency : "" : 0  }} nm</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-clock-o"></i>
+                                                            <small class="text-muted">Departure Time (Block Off)</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.BlockOffTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOffTimeUTC | date:"HH:mm'z'") : '--' }}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-door-closed"></i>
+                                                            <small class="text-muted">Departure Gate</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.DepartureGate }}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-clock-o"></i>
+                                                            <small class="text-muted">Arrival Time (Block On)</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.BlockOnTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOnTimeUTC | date:"HH:mm'z'") : '--' }}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="callout callout-info">
+                                                            <i class="fas fa-door-closed"></i>
+                                                            <small class="text-muted">Arrival Gate</small>
+                                                            <br>
+                                                            <strong class="h4">{{ manifest.ArrivalGate }}</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.row-->
+                                        <div class="row">
+                                            <div class="card-body pb-0">
+                                                <table class="table table-striped text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Pre-flight</th>
+                                                            <th>Boarding</th>
+                                                            <th class="bg-success">Block Off</th>
+                                                            <th class="bg-success">Departure</th>
+                                                            <th class="bg-success">Arrival</th>
+                                                            <th class="bg-success">Block On</th>
+                                                            <th class="bg-success">Flight Time</th>
+                                                            <th>Early/ Late</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="h5">{{ manifest.PreFlightTimeUTC !== '0001-01-01T00:00:00' ? (manifest.PreFlightTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ manifest.BoardingTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BoardingTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ manifest.BlockOffTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOffTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ manifest.DepartureTimeUTC !== '0001-01-01T00:00:00' ? (manifest.DepartureTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ manifest.ArrivalTimeUTC !== '0001-01-01T00:00:00' ? (manifest.ArrivalTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ manifest.BlockOnTimeUTC !== '0001-01-01T00:00:00' ? (manifest.BlockOnTimeUTC | date:"HH:mm'z'") : '--' }}</td>
+                                                            <td class="h5">{{ (manifest.FlightTime | date:'h') === '12' ? '00' : (manifest.FlightTime | date:'h') }}h {{ (manifest.FlightTime | date:'mm') }}m</td>
+                                                            <td class="h5 text-success">
+                                                                {{ manifest.EarlyArrivalTimeUTC !== '0001-01-01T00:00:00' ? (manifest.EarlyArrivalTimeUTC | date:"HH:mm'z'") : '--' }}<span class="text-dark">/</span>
+                                                                {{ manifest.LateArrivalTimeUTC !== '0001-01-01T00:00:00' ? (manifest.LateArrivalTimeUTC | date:"HH:mm'z'") : '--' }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--/.row-->
+
+                                        <div class="row pb-0">
+                                            <!-- Flight Crew -->
+                                            <div class="col-sm-6 col-lg-4">
+                                                <hr class="mt-0">
+                                                <ul class="icons-list">
+                                                    <li>
+                                                        <i class="bg-success" ng-class="manifest.CoPilotGender === 'F' ? 'icon-user-female' : 'icon-user'"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Co-pilot</div>
+                                                            <small>Co-pilot flying if available</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <span ng-show="manifest.CoPilotName != null">
+                                                                <strong>{{ manifest.CoPilotName }}</strong>
+                                                            </span>
+                                                            <strong ng-show="manifest.CoPilotName === null">N/A</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success" ng-class="manifest.ChiefFlightAttendanGender === 'M' ? 'icon-user' : 'icon-user-female'"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Chief Flight Attendant</div>
+                                                            <small>Rate added to base pay</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <span ng-show="manifest.ChiefFlightAttendantName != null">
+                                                                <strong>{{ manifest.ChiefFlightAttendantName }}</strong>
+                                                            </span>
+                                                            <strong ng-show="manifest.ChiefFlightAttendantName === null">N/A</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success" ng-class="manifest.FlightAttendantGender == 'M' ? 'icon-user' : 'icon-user-female'"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Flight Attendant</div>
+                                                            <small>Amount to get certified for aircraft type</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <span ng-show="manifest.FlightAttendantName != null">
+                                                                <strong>{{ manifest.FlightAttendantName }}</strong>
+                                                            </span>
+                                                            <strong ng-show="manifest.FlightAttendantName === null">N/A</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success" ng-class="manifest.FlightInstructorGender == 'M' ? 'icon-user' : 'icon-user-female'"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Flight Instructor</div>
+                                                            <small>Instructor for flight school</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <span ng-show="manifest.FlightInstructorName != null">
+                                                                <strong>{{ manifest.FlightInstructorName }}</strong>
+                                                            </span>
+                                                            <strong ng-show="manifest.FlightInstructorName === null">N/A</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- Payload -->
+                                            <div class="col-sm-6 col-lg-4">
+                                                <hr class="mt-0">
+                                                <ul class="icons-list">
+                                                    <li>
+                                                        <i class="bg-success"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Passengers</div>
+                                                            <small>Total number of passengers on board</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.TotalPassengers }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Passenger Payload</div>
+                                                            <small>Passenger weight</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.PayloadPassenger }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Passenger Baggage</div>
+                                                            <small>Baggage weight</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.PayloadBaggage }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Cargo Payload</div>
+                                                            <small>Weight of cargo</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.PayloadCargo }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-4">
+                                                <hr class="mt-0">
+                                                <ul class="icons-list">
+                                                    <li>
+                                                        <i class="bg-success"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Current Leg? / Completed?</div>
+                                                            <small>Is this the current flight / Has flight been completed</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <span ng-class="manifest.IsCurrentLeg === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span> / <span ng-class="manifest.IsCompleted === true ? 'fa fa-check text-success' : 'fa fa-close text-danger'"></span>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success icon-star"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Rating</div>
+                                                            <small>Based on route and aircraft</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.Rating | currency : "" : 2  }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success icon-clock"></i>
+                                                        <div class="desc">
+                                                            <div class="title">On Time %</div>
+                                                            <small>Based on route and aircraft</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ (manifest.OnTimePct * 100).toFixed(1) }}%</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="bg-success icon-star"></i>
+                                                        <div class="desc">
+                                                            <div class="title">Avg Groundspeed Kts</div>
+                                                            <small>Based on route and aircraft</small>
+                                                        </div>
+                                                        <div class="value">
+                                                            <div class="small text-muted">&nbsp;</div>
+                                                            <strong>{{ manifest.AvgGroundSpeedKts }}</strong>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <i class="fa fa-circle text-muted mt-2 pl-4"></i>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!--/.row-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                    </div>
+                    <div ng-class="{active: selectedTab == 3}" class="tab-pane" ng-show="selectedTab == 3" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h4 class="card-title mb-0">Previous Flights<span class="font-sm pl-1">(UTC)</span></h4>
+                                    </div><!--/.col-->
+                                </div><!--/.row-->
+                                <div class="" style="margin-top:20px;">
+                                    <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="logbookSectors.length > 0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Company</th>
+                                                <th>Rank</th>
+                                                <th>Pre-flight</th>
+                                                <th>Rating</th>
+                                                <th>On Time?</th>
+                                                <th>Time (mins)</th>
+                                                <th>Time (hrs)</th>
+                                                <th>Fuel Used (lbs)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="logbookSector in logbookSectors">
+                                                <td>{{ logbookSector.CompanyName }}</td>
+                                                <td>{{ logbookSector.RankDescription }}</td>
+                                                <td>{{ logbookSector.ActualTimePreFlightUTC !== '0001-01-01T00:00:00' ? (logbookSector.ActualTimePreFlightUTC | date:"HH:mm'z'") : '' }}</td>
+                                                <td>{{ logbookSector.Rating | currency : "" : 2  }}</td>
+                                                <td><span ng-class="logbookSector.IsFlightOnTime === true ? 'fa fa-check text-success' : ''"></span></td>
+                                                <td>{{ logbookSector.FlightTimeMin | currency : "" : 0  }}</td>
+                                                <td>{{ logbookSector.FlightTimeHrs | currency : "" : 2  }}</td>
+                                                <td>{{ logbookSector.FuelUsedFlight | currency : "" : 2  }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="text-center w-100" ng-show="logbookSectors.length === 0">
+                                        <span>No previous flights completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-class="{active: selectedTab == 4}" class="tab-pane" ng-show="selectedTab == 4" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h4 class="card-title mb-0">Passengers</h4>
+                                    </div><!--/.col-->
+                                </div><!--/.row-->
+                                <div class="" style="margin-top:20px;">
+                                    <table class="table table-hover table-outline mb-0 hidden-sm-down table-striped" ng-show="passengers.length > 0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Baggage Weight (lbs)</th>
+                                                <th>Passenger Weight (lbs)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="passenger in passengers">
+                                                <td><span class="pr-2" ng-class="passenger.PassengerClass === 'M' ? 'icon-user' : 'icon-user-female'"></span>{{ passenger.PassengerName }}</td>
+                                                <td>{{ passenger.BaggageWeight }}</td>
+                                                <td>{{ passenger.PassengerWeight }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="text-center w-100" ng-show="passengers.length === 0">
+                                        <span>No passengers on flight</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-class="{active: selectedTab == 5}" class="tab-pane" ng-show="selectedTab == 5" role="tabpanel">
+                        <object class="col-lg-12" height="650" type="text/html" data="http://airnav.com/airport/CLT"></object>
+
+                        <!--<iframe class="" type="text/html" width="640" height="385" ng-src="{{trustSrc(url.src)}}" allowfullscreen frameborder="0" target="_parent"></iframe>-->
+                    </div>
+                    <div ng-class="{active: selectedTab == 6}" class="tab-pane" ng-show="selectedTab == 6" role="tabpanel">
+                        <object class="col-lg-12" height="650" type="text/html" data="http://airnav.com/airport/RDU"></object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
